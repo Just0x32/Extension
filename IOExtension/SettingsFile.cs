@@ -9,7 +9,7 @@ namespace IOExtension
 {
     public static class SettingsFile
     {
-        #region [ Fileds ]
+        #region [ Fields ]
         private static bool isLocked = false;
 
         private readonly static char[] fileNameForbiddenSymbols = { '<', '>', '"', '/', '|', '?', '*', ':', '\\' };
@@ -39,11 +39,8 @@ namespace IOExtension
                 {
                     int indexOfFileName = value.LastIndexOf('\\') + 1;
 
-                    if (IsDirectoryAvailable(value[..indexOfFileName]) && IsFileAvailable(value))
-                    {
-                        directoryPath = value[..indexOfFileName];
-                        fileName = value[indexOfFileName..];
-                    }
+                    directoryPath = value[..indexOfFileName];
+                    fileName = value[indexOfFileName..];
                 }
             }
         }
@@ -59,6 +56,54 @@ namespace IOExtension
         }
         #endregion
 
+        #region [ User Methods ]
+        public static bool IsSettingsFileAvailable(bool createIfAbsent = false)
+        {
+            if (IsDirectoryAvailable(directoryPath, createIfAbsent) && IsFileAvailable(SettingsFilePath, createIfAbsent))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool TryDeleteSettingsFile()
+        {
+            if (File.Exists(SettingsFilePath))
+            {
+                File.Delete(SettingsFilePath);
+
+                if (File.Exists(SettingsFilePath))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public static void SetPropertyValue(string property, string value)
+        {
+            while (isLocked) ;
+
+            if (!IsError && IsDirectoryAvailable(directoryPath) && IsFileAvailable(SettingsFilePath))
+                WriteValue(property, value);
+        }
+
+        public static string GetPropertyValue(string property)
+        {
+            while (isLocked) ;
+
+            if (!IsError && IsFileAvailable(SettingsFilePath))
+            {
+                return ReadValue(property);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static void ResetErrors()
         {
             IsFolderCreatingError = false;
@@ -66,6 +111,9 @@ namespace IOExtension
             IsFileWritingError = false;
             IsFileReadingError = false;
         }
+
+        public static void Unlock() => isLocked = false;
+        #endregion
 
         private static bool IsPathValid(string value)
         {
@@ -127,12 +175,19 @@ namespace IOExtension
             }
         }
 
-        private static bool IsDirectoryAvailable(string path)
+        private static bool IsDirectoryAvailable(string path, bool createIfAbsent = false)
         {
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                if (!TryCreateDirectory(path))
+                if (createIfAbsent)
+                {
+                    if (!TryCreateDirectory(path))
+                        return false;
+                }
+                else
+                {
                     return false;
+                }
             }
 
             return true;
@@ -153,12 +208,19 @@ namespace IOExtension
             }
         }
 
-        private static bool IsFileAvailable(string path)
+        private static bool IsFileAvailable(string path, bool createIfAbsent = false)
         {
             if (!File.Exists(path))
             {
-                if (!TryCreateFile(path))
+                if (createIfAbsent)
+                {
+                    if (!TryCreateFile(path))
+                        return false;
+                }
+                else
+                {
                     return false;
+                }
             }
 
             return true;
@@ -182,28 +244,6 @@ namespace IOExtension
                 }
 
                 return true;
-            }
-        }
-
-        public static void SetPropertyValue(string property, string value)
-        {
-            while (isLocked) ;
-
-            if (!IsError && IsDirectoryAvailable(directoryPath) && IsFileAvailable(SettingsFilePath))
-                WriteValue(property, value);
-        }
-
-        public static string GetPropertyValue(string property)
-        {
-            while (isLocked) ;
-
-            if (!IsError)
-            {
-                return ReadValue(property);
-            }
-            else
-            {
-                return null;
             }
         }
 
@@ -273,7 +313,7 @@ namespace IOExtension
             {
                 streamReader = new StreamReader(path);
                 string line;
-                
+
                 while (!streamReader.EndOfStream)
                 {
                     line = streamReader.ReadLine();
@@ -294,7 +334,5 @@ namespace IOExtension
             isLocked = false;
             return value;
         }
-
-        public static void Unlock() => isLocked = false;
     }
 }

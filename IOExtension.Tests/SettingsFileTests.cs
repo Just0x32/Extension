@@ -189,7 +189,7 @@ namespace IOExtension.Tests
             {
                 string directoryPath = (string)GetFieldValue("directoryPath");
 
-                if (!String.IsNullOrEmpty(directoryPath) && directoryPath != @"\" && !directoryPath.Contains(':'))
+                if (!String.IsNullOrEmpty(directoryPath) && directoryPath != @"\" && !directoryPath.Contains(':') && Directory.Exists(directoryPath))
                     Directory.Delete(directoryPath);
             }
         }
@@ -220,7 +220,9 @@ namespace IOExtension.Tests
         [Test, TestCaseSource(nameof(propertiesWithValues))]
         public void GetPropertyValue_SetValues_Values(string[] values)
         {
+            SettingsFile.IsSettingsFileAvailable(true);
             SettingsFile.SetPropertyValue(values[0], values[1]);
+
             string result = SettingsFile.GetPropertyValue(values[0]);
 
             Assert.AreEqual(values[1], result, $"\"{result}\" is not \"{values[1]}\".");
@@ -230,6 +232,8 @@ namespace IOExtension.Tests
         public void GetPropertyValue_SetValuesWithNotDefaultSettingsFilePath_Values(string value)
         {
             SettingsFile.SettingsFilePath = value;
+            SettingsFile.IsSettingsFileAvailable(true);
+
             foreach (var propertyWithValue in propertiesWithValues)
             {
                 SettingsFile.SetPropertyValue(propertyWithValue[0], propertyWithValue[1]);
@@ -265,23 +269,31 @@ namespace IOExtension.Tests
         }
 
         [Test, TestCaseSource(nameof(validSettingsFilePaths))]
-        public void SettingsFilePath_SetValidValues_SettingsFilesExist(string value)
+        public void IsSettingsFileAvailable_SetValues_False(string value)
         {
             SettingsFile.SettingsFilePath = value;
-            bool result = File.Exists(value);
-
-            Assert.IsTrue(result, $"\"{value}\" does not exist.");
-        }
-
-        [Test, TestCaseSource(nameof(invalidSettingsFilePaths))]
-        public void SettingsFilePath_SetInvalidValues_SettingsFilesNotExist(string value)
-        {
-            SettingsFile.SettingsFilePath = value;
-            bool result = false;
-            if (!value.Contains('/'))
-                result = File.Exists(value);
+            bool result = SettingsFile.IsSettingsFileAvailable();
 
             Assert.IsFalse(result, $"\"{value}\" exists.");
+        }
+
+        [Test, TestCaseSource(nameof(validSettingsFilePaths))]
+        public void IsSettingsFileAvailable_SetValues_True(string value)
+        {
+            SettingsFile.SettingsFilePath = value;
+            bool result = SettingsFile.IsSettingsFileAvailable(true);
+
+            Assert.IsTrue(result, $"\"{value}\" doesn't exist.");
+        }
+
+        [Test, TestCaseSource(nameof(validSettingsFilePaths))]
+        public void TryDeleteSettingsFile_SetValues_True(string value)
+        {
+            SettingsFile.SettingsFilePath = value;
+            SettingsFile.IsSettingsFileAvailable(true);
+            bool result = SettingsFile.TryDeleteSettingsFile();
+
+            Assert.IsTrue(result, $"\"{value}\" exists.");
         }
 
         [Test]
