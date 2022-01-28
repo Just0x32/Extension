@@ -2,7 +2,7 @@ using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System;
 using System.IO;
-using System.Reflection;
+using ReflectionExtension;
 
 namespace IOExtension.Tests
 {
@@ -32,35 +32,6 @@ namespace IOExtension.Tests
 
         private static string[] validSettingsFilePaths;
         private static string[] invalidSettingsFilePaths;
-        #endregion
-
-        #region [ Reflection ]
-        private void SetFieldValue(string fieldName, object value)
-        {
-            Type type = typeof(SettingsFile);
-            FieldInfo field = type.GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-            field.SetValue(new object(), value);
-        }
-
-        private object GetFieldValue(string fieldName)
-        {
-            Type type = typeof(SettingsFile);
-            FieldInfo field = type.GetField(fieldName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-            return field.GetValue(new object());
-        }
-
-        private void SetPropertyValue(string propertyName, object value)
-        {
-            Type type = typeof(SettingsFile);
-            PropertyInfo property = type.GetProperty(propertyName, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
-            property.SetValue(new object(), value);
-        }
-
-        private object GetMethodResult(string methodName, params object[] parameters)
-        {
-            Type type = typeof(SettingsFile);
-            return type.InvokeMember(methodName, BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public, null, new object(), parameters);
-        }
         #endregion
 
         #region [ Initialization ]
@@ -187,8 +158,8 @@ namespace IOExtension.Tests
 
             void DeleteSettingsFileDirectory()
             {
-                string directoryPath = (string)GetFieldValue("directoryPath");
-
+                string directoryPath = (string)Reflection.GetFieldValue(typeof(SettingsFile), "directoryPath");
+                
                 if (!String.IsNullOrEmpty(directoryPath) && directoryPath != @"\" && !directoryPath.Contains(':') && Directory.Exists(directoryPath))
                     Directory.Delete(directoryPath);
             }
@@ -197,14 +168,14 @@ namespace IOExtension.Tests
         [Test, TestCaseSource(nameof(validSettingsFilePaths))]
         public void IsPathValid_ValidValue_True(string value)
         {
-            bool result = (bool)GetMethodResult("IsPathValid", value);
+            bool result = (bool)Reflection.GetMethodResult(typeof(SettingsFile), "IsPathValid", value);
             Assert.IsTrue(result, $"{value} is invalid.");
         }
 
         [Test, TestCaseSource(nameof(invalidSettingsFilePaths))]
         public void IsPathValid_InvalidValue_False(string value)
         {
-            bool result = (bool)GetMethodResult("IsPathValid", value);
+            bool result = (bool)Reflection.GetMethodResult(typeof(SettingsFile), "IsPathValid", value);
             Assert.IsFalse(result, $"{value} is valid.");
         }
 
@@ -299,10 +270,10 @@ namespace IOExtension.Tests
         [Test]
         public void ResetErrors_SetAllErrorsTrue_IsErrorFalse()
         {
-            SetPropertyValue(nameof(SettingsFile.IsFolderCreatingError), true);
-            SetPropertyValue(nameof(SettingsFile.IsFileCreatingError), true);
-            SetPropertyValue(nameof(SettingsFile.IsFileWritingError), true);
-            SetPropertyValue(nameof(SettingsFile.IsFileReadingError), true);
+            Reflection.SetPropertyValue(typeof(SettingsFile), nameof(SettingsFile.IsFolderCreatingError), true);
+            Reflection.SetPropertyValue(typeof(SettingsFile), nameof(SettingsFile.IsFileCreatingError), true);
+            Reflection.SetPropertyValue(typeof(SettingsFile), nameof(SettingsFile.IsFileWritingError), true);
+            Reflection.SetPropertyValue(typeof(SettingsFile), nameof(SettingsFile.IsFileReadingError), true);
 
             SettingsFile.ResetErrors();
             bool result = SettingsFile.IsError;
@@ -313,10 +284,10 @@ namespace IOExtension.Tests
         public void Unlock_SetIsLockedTrue_IsLockedFalse()
         {
             string fieldName = "isLocked";
-            SetFieldValue(fieldName, true);
+            Reflection.SetFieldValue(typeof(SettingsFile), fieldName, true);
 
             SettingsFile.Unlock();
-            bool result = (bool)GetFieldValue(fieldName);
+            bool result = (bool)Reflection.GetFieldValue(typeof(SettingsFile), fieldName);
             Assert.IsFalse(result, "The class wasn't unlocked.");
         }
     }
