@@ -168,14 +168,14 @@ namespace IOExtension.Tests
         [Test, TestCaseSource(nameof(validSettingsFilePaths))]
         public void IsPathValid_ValidValue_True(string value)
         {
-            bool result = (bool)Reflection.GetMethodResult(typeof(SettingsFile), "IsPathValid", value);
+            bool result = (bool)Reflection.GetMethodResult(typeof(SettingsFile), "IsPathValid", null, value);
             Assert.IsTrue(result, $"{value} is invalid.");
         }
 
         [Test, TestCaseSource(nameof(invalidSettingsFilePaths))]
         public void IsPathValid_InvalidValue_False(string value)
         {
-            bool result = (bool)Reflection.GetMethodResult(typeof(SettingsFile), "IsPathValid", value);
+            bool result = (bool)Reflection.GetMethodResult(typeof(SettingsFile), "IsPathValid", null, value);
             Assert.IsFalse(result, $"{value} is valid.");
         }
 
