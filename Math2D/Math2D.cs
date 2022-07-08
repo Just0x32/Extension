@@ -40,6 +40,24 @@ namespace Math2D
         }
 
         /// <summary>
+        /// Returns a location of a point relative to a line.
+        /// </summary>
+        /// <param name="pointX">Coordinate X of the single point.</param>
+        /// <param name="pointY">Coordinate Y of the single point.</param>
+        /// <param name="lineX1">Coordinate X of the line first point.</param>
+        /// <param name="lineY1">Coordinate Y of the line first point.</param>
+        /// <param name="lineX2">Coordinate X of the line second point.</param>
+        /// <param name="lineY2">Coordinate Y of the line second point.</param>
+        /// <returns>0 — <i>if the point is on the line,</i><br/>
+        /// 1 — <i>if the point is on an upper half-plane from the line,</i><br/>
+        /// -1 — <i>if the point is on an lower half-plane from the line.</i><br/></returns>
+        public static int RelativeToLinePointLocation(double pointX, double pointY, double lineX1, double lineY1, double lineX2, double lineY2)
+        {
+            ConvertOneLineABCCoefficients(LineABCCoefficients(lineX1, lineY1, lineX2, lineY2), out double a, out double b, out double c);
+            return -Math.Sign(a * pointX + b * pointY + c);
+        }
+
+        /// <summary>
         /// Returns a distance between a point and a line.
         /// </summary>
         /// <param name="pointX">Coordinate X of the single point.</param>

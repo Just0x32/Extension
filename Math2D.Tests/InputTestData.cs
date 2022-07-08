@@ -146,8 +146,333 @@
             #endregion
         };
 
+        public static int[][] Result_RelativeToLinePointLocations { get; private set; } =
+        {
+            // Point (0, 0)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                0, 0,
+                // On Y-axis line
+                0, 0,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                0, 0,
+                // Passed through the origin line, at -11 degrees to the axis X
+                0, 0,
+                // Passed through the origin line, at -37 degrees to the axis X
+                0, 0,
+                // Passed through the origin line, at -45 degrees to the axis X
+                0, 0,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                1, 1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                1, 1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                -1, -1,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+            // Point (1, 0)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                0, 0,
+                // On Y-axis line
+                -1, -1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                -1, -1,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                1, 1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                0, 0,
+                // Y-axis-parallel line, left-hand from Y-axis
+                -1, -1,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+            // Point (-1, 1)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                1, 1,
+                // On Y-axis line
+                1, 1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                0, 0,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                0, 0,
+                // X-axis-parallel line, below X-axis
+                1, 1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                1, 1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                0, 0,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
+                0, 0,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                0, 0,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                0, 0,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                0, 0,
+                #endregion
+            },
+            // Point (-1, -1)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                -1, -1,
+                // On Y-axis line
+                1, 1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                1, 1,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                0, 0,
+                // Y-axis-parallel line, right-hand from Y-axis
+                1, 1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                0, 0,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+            // Point (100, 0)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                0, 0,
+                // On Y-axis line
+                -1, -1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                -1, -1,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                1, 1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                -1, -1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                -1, -1,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+            // Point (100, -1)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                -1, -1,
+                // On Y-axis line
+                -1, -1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                -1, -1,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                0, 0,
+                // Y-axis-parallel line, right-hand from Y-axis
+                -1, -1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                -1, -1,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+            // Point (100, -2)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                -1, -1,
+                // On Y-axis line
+                -1, -1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                -1, -1,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                -1, -1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                -1, -1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                -1, -1,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+            // Point (100, -3)
+            new int[]
+            {
+                #region [ Passed through the origin lines ]
+                // On X-axis line
+                -1, -1,
+                // On Y-axis line
+                -1, -1,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                -1, -1,
+                #endregion
+                
+                #region [ Axis-parallel lines ]
+                // X-axis-parallel line, above X-axis
+                -1, -1,
+                // X-axis-parallel line, below X-axis
+                -1, -1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                -1, -1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                -1, -1,
+                #endregion
+                
+                #region [ Not passed through the origin lines, second quarter ]
+                // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
+                -1, -1,
+                // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+                -1, -1,
+                // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+                -1, -1,
+                #endregion
+            },
+        };
+
         public static double[][] Result_BetweenPointAndLineDistances { get; } =
         {
+            // Point (0, 0)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -187,6 +512,7 @@
                 1.4142135623730951, 1.4142135623730951,
                 #endregion
             },
+            // Point (1, 0)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -226,6 +552,7 @@
                 2.121320343559643, 2.121320343559643,
                 #endregion
             },
+            // Point (-1, 1)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -265,6 +592,7 @@
                 0, 0,
                 #endregion
             },
+            // Point (-1, -1)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -304,6 +632,7 @@
                 1.4142135623730951, 1.4142135623730951,
                 #endregion
             },
+            // Point (100, 0)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -343,6 +672,7 @@
                 72.12489168102785, 72.12489168102785,
                 #endregion
             },
+            // Point (100, -1)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -382,6 +712,7 @@
                 72.8319984622144, 72.8319984622144,
                 #endregion
             },
+            // Point (100, -2)
             new double[]
             {
                 #region [ Passed through the origin lines ]
@@ -421,6 +752,7 @@
                 73.53910524340095, 73.53910524340095,
                 #endregion
             },
+            // Point (100, -3)
             new double[]
             {
                 #region [ Passed through the origin lines ]

@@ -29,6 +29,32 @@ namespace Math2D.Tests
                 $"{result[0]}, {result[1]}, {result[2]} are not {coefficients.A}, {coefficients.B}, {coefficients.C}");
         }
 
+        private static IEnumerable<TestCaseData> RelativeToLinePointLocationsSource()
+        {
+            for (int i = 0; i < SinglePoints.Length; i++)
+                for (int j = 0; j < LineSegments.Length; j++)
+                    yield return new TestCaseData(SinglePoints[i], LineSegments[j], Result_RelativeToLinePointLocations[i][j]);
+        }
+
+        [Test, TestCaseSource(nameof(RelativeToLinePointLocationsSource))]
+        public void RelativeToLinePointLocation_Values_Values(SinglePoint point, LineSegment line, int location)
+        {
+            int result = Math2D.RelativeToLinePointLocation(point.X, point.Y, line.X1, line.Y1, line.X2, line.Y2);
+            Assert.True(result == location, ErrorText());
+
+            string ErrorText()
+            {
+                if (Math.Abs(result) > 1)
+                    return $"Result absolute value is more than 1: {result}.";
+                else if (Math.Abs(location) > 1)
+                    return $"Source absolute value is more than 1: {location}.";
+                else if (result != location)
+                    return $"{result} is not {location}.";
+                else
+                    return $"Not a error.";
+            }
+        }
+
         private static IEnumerable<TestCaseData> PointsAndLinesSource()
         {
             for (int i = 0; i < SinglePoints.Length; i++)
