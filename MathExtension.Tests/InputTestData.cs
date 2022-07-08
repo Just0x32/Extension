@@ -146,6 +146,46 @@
             #endregion
         };
 
+        public static double[] Result_LineAngles { get; private set; } =
+        {
+            #region [ Passed through the origin lines ]
+            // On X-axis line
+            0, 0,
+            // On Y-axis line
+            90, 90,
+            // Passed through the origin line, at between 0 and -1 degrees to the axis X
+            -5.7298E-5, -5.7298E-5,
+            // Passed through the origin line, at -11 degrees to the axis X
+            -11.309932474, -11.309932474,
+            // Passed through the origin line, at -37 degrees to the axis X
+            -36.869897646, -36.869897646,
+            // Passed through the origin line, at -45 degrees to the axis X
+            -45, -45,
+            #endregion
+
+            #region [ Axis-parallel lines ]
+            // X-axis-parallel line, above X-axis
+            0, 0,
+            // X-axis-parallel line, below X-axis
+            0, 0,
+            // Y-axis-parallel line, right-hand from Y-axis
+            90, 90,
+            // Y-axis-parallel line, left-hand from Y-axis
+            90, 90,
+            #endregion
+
+            #region [ Not passed through the origin lines, second quarter ]
+            // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
+            5.7298E-5, 5.7298E-5,
+            // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+            11.309932474, 11.309932474,
+            // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+            36.869897646, 36.869897646,
+            // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+            45, 45,
+            #endregion
+        };
+
         public static int[][] Result_RelativeToLinePointLocations { get; private set; } =
         {
             // Point (0, 0)

@@ -14,7 +14,9 @@ namespace MathExtension.Tests
         private static IEnumerable<TestCaseData> LineSegmentsAndABCCoefficientsSource()
         {
             if (LineSegments.Length != Result_ABCCoefficients.Length)
-                throw new ArgumentException($"{nameof(LineSegments)} and {nameof(Result_ABCCoefficients)} lenghts are different.");
+                throw new ArgumentException(
+                    $"{nameof(LineSegments)} and {nameof(Result_ABCCoefficients)} lenghts are different: " +
+                    $"{LineSegments.Length}; {Result_ABCCoefficients.Length}.");
 
             for (int i = 0; i < LineSegments.Length; i++)
                 yield return new TestCaseData(LineSegments[i], Result_ABCCoefficients[i]);
@@ -24,9 +26,43 @@ namespace MathExtension.Tests
         public void LineABCCoefficients_Values_Values(LineSegment segment, LineABCCoefficients coefficients)
         {
             double[] result = Math2D.LineABCCoefficients(segment.X1, segment.Y1, segment.X2, segment.Y2);
-            Assert.True(result.Length == 3 && result[0] == coefficients.A
-                && result[1] == coefficients.B && result[2] == coefficients.C,
-                $"{result[0]}, {result[1]}, {result[2]} are not {coefficients.A}, {coefficients.B}, {coefficients.C}");
+            Assert.True(IsValidResult(), ErrorText());
+
+            bool IsValidResult()
+            {
+                return result.Length == 3
+                    && result[0] == coefficients.A
+                    && result[1] == coefficients.B
+                    && result[2] == coefficients.C;
+            }
+
+            string ErrorText()
+            {
+                if (result.Length != 3)
+                    return $"Result have not 3 coefficients: {result.Length}.";
+                else if (result[0] != coefficients.A || result[1] != coefficients.B || result[2] != coefficients.C)
+                    return $"{result[0]}, {result[1]}, {result[2]} are not {coefficients.A}, {coefficients.B}, {coefficients.C}.";
+                else
+                    return $"Not an error.";
+            }
+        }
+
+        private static IEnumerable<TestCaseData> LineAnglesSource()
+        {
+            if (LineSegments.Length != Result_LineAngles.Length)
+                throw new ArgumentException(
+                    $"{nameof(LineSegments)} and {nameof(Result_LineAngles)} lenghts are different: " +
+                    $"{LineSegments.Length}; {Result_LineAngles.Length}.");
+
+            for (int i = 0; i < LineSegments.Length; i++)
+                yield return new TestCaseData(LineSegments[i], Result_LineAngles[i]);
+        }
+
+        [Test, TestCaseSource(nameof(LineAnglesSource))]
+        public void LineAngle_Values_Values(LineSegment segment, double angle)
+        {
+            double result = Math2D.LineAngle(segment.X1, segment.Y1, segment.X2, segment.Y2);
+            Assert.True(Math.Abs(result - angle) < angleCalculationThreshold, $"{result} is not {angle}.");
         }
 
         private static IEnumerable<TestCaseData> RelativeToLinePointLocationsSource()

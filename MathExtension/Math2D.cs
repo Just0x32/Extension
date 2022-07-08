@@ -41,6 +41,27 @@ namespace MathExtension
         }
 
         /// <summary>
+        /// Returns an angle of a line in degrees relative to X axis.
+        /// </summary>
+        /// <param name="x1">Coordinate X of the first point.</param>
+        /// <param name="y1">Coordinate Y of the first point.</param>
+        /// <param name="x2">Coordinate X of the second point.</param>
+        /// <param name="y2">Coordinate Y of the second point.</param>
+        /// <returns>A number.</returns>
+        public static double LineAngle(double x1, double y1, double x2, double y2)
+        {
+            ConvertOneLineABCCoefficients(LineABCCoefficients(x1, y1, x2, y2), out double a2, out double b2, out double c2);
+
+            if (Math.Abs(b2) < CalculationThreshold)
+                return 90;
+            else
+            {
+                double angleTangent = -a2 / b2;
+                return Math.Atan(angleTangent) * 180 / Math.PI;
+            }
+        }
+
+        /// <summary>
         /// Returns a location of a point relative to a line.
         /// </summary>
         /// <param name="pointX">Coordinate X of the single point.</param>
@@ -67,7 +88,7 @@ namespace MathExtension
         /// <param name="lineY1">Coordinate Y of the line first point.</param>
         /// <param name="lineX2">Coordinate X of the line second point.</param>
         /// <param name="lineY2">Coordinate Y of the line second point.</param>
-        /// <returns>A number.</returns>
+        /// <returns>A positive number.</returns>
         public static double BetweenPointAndLineDistance(double pointX, double pointY, double lineX1, double lineY1, double lineX2, double lineY2)
         {
             ConvertOneLineABCCoefficients(LineABCCoefficients(lineX1, lineY1, lineX2, lineY2), out double a, out double b, out double c);
@@ -183,7 +204,7 @@ namespace MathExtension
         }
 
         /// <summary>
-        /// Returns an angle in degrees between two lines.
+        /// Returns an angle between two lines in degrees.
         /// </summary>
         /// <param name="firstLineX1"></param>
         /// <param name="firstLineY1"></param>
@@ -193,7 +214,7 @@ namespace MathExtension
         /// <param name="secondLineY1"></param>
         /// <param name="secondLineX2"></param>
         /// <param name="secondLineY2"></param>
-        /// <returns>A number.</returns>
+        /// <returns>A positive number.</returns>
         public static double BetweenTwoLinesAngle(double firstLineX1, double firstLineY1, double firstLineX2, double firstLineY2,
             double secondLineX1, double secondLineY1, double secondLineX2, double secondLineY2)
         {
@@ -207,7 +228,7 @@ namespace MathExtension
                 return 90;
             else
             {
-                double angleTangent = Math.Abs((a2 * b1 - a1 * b2) / denominator);
+                double angleTangent = Math.Abs((a1 * b2 - a2 * b1) / denominator);
                 return Math.Atan(angleTangent) * 180 / Math.PI;
             }
         }
