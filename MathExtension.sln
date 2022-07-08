@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math2D", "Math2D\Math2D.csproj", "{43F84E3D-091F-4F50-9A67-D18920866991}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension", "MathExtension\MathExtension.csproj", "{43F84E3D-091F-4F50-9A67-D18920866991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math2D.Tests", "Math2D.Tests\Math2D.Tests.csproj", "{6290E11F-AC65-4346-88D0-68A702F245BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathExtension.Tests", "MathExtension.Tests\MathExtension.Tests.csproj", "{6290E11F-AC65-4346-88D0-68A702F245BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

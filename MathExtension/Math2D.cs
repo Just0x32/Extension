@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Math2D
+
+namespace MathExtension
 {
     public static class Math2D
     {

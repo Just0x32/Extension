@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using static Math2D.Tests.InputTestData;
+using static MathExtension.Tests.InputTestData;
 
-namespace Math2D.Tests
+namespace MathExtension.Tests
 {
     [TestFixture]
     public class Math2DTests

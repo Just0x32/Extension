@@ -1,4 +1,4 @@
-﻿namespace Math2D.Tests
+﻿namespace MathExtension.Tests
 {
     public static class InputTestData
     {
