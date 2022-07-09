@@ -40,25 +40,39 @@ namespace MathExtension
             return new double[] { a, b, c };
         }
 
-        /// <summary>
-        /// Returns an angle of a line in degrees relative to X axis.
-        /// </summary>
-        /// <param name="x1">Coordinate X of the first point.</param>
-        /// <param name="y1">Coordinate Y of the first point.</param>
-        /// <param name="x2">Coordinate X of the second point.</param>
-        /// <param name="y2">Coordinate Y of the second point.</param>
-        /// <returns>A number.</returns>
-        public static double LineAngle(double x1, double y1, double x2, double y2)
+        private static double[] VectorABCoefficients(double x, double y)
         {
-            ConvertOneLineABCCoefficients(LineABCCoefficients(x1, y1, x2, y2), out double a2, out double b2, out double c2);
+            double a = y;
+            double b = -x;
 
-            if (Math.Abs(b2) < CalculationThreshold)
-                return 90;
-            else
+            return new double[] { a, b };
+        }
+
+        /// <summary>
+        /// Returns an angle of a vector in degrees relative to X axis.
+        /// </summary>
+        /// <param name="x">Coordinate X of the vector.</param>
+        /// <param name="y">Coordinate Y of the vector.</param>
+        /// <returns>A number from 0 to 360.</returns>
+        public static double VectorAngle(double x, double y)
+        {
+            double angle = Math.Atan(y / x) * 180 / Math.PI;
+
+            if (x == 0)
             {
-                double angleTangent = -a2 / b2;
-                return Math.Atan(angleTangent) * 180 / Math.PI;
+                if (y > 0)
+                    return 90;
+                else if (y < 0)
+                    return 270;
+                else
+                    return 0;
             }
+            else if (x > 0 && y >= 0)
+                return angle;
+            else if (x < 0)
+                return angle + 180;
+            else
+                return angle + 360;
         }
 
         /// <summary>
@@ -106,7 +120,7 @@ namespace MathExtension
         /// <param name="secondLineY1">Coordinate Y of the second line first point.</param>
         /// <param name="secondLineX2">Coordinate X of the second line second point.</param>
         /// <param name="secondLineY2">Coordinate Y of the second line second point.</param>
-        /// <returns>An array { X, Y } <i>or</i><br/>Null — <i>if parallel or matching lines.</i></returns>
+        /// <returns>An array { X, Y } of a numbers <i>or</i><br/>Null — <i>if parallel or matching lines.</i></returns>
         public static double[]? TwoLinesIntersectionPoint(double firstLineX1, double firstLineY1, double firstLineX2, double firstLineY2,
             double secondLineX1, double secondLineY1, double secondLineX2, double secondLineY2)
         {
@@ -179,6 +193,26 @@ namespace MathExtension
         }
 
         /// <summary>
+        /// Returns result of two vectors collinearity.
+        /// </summary>
+        /// <param name="firstVectorX">Coordinate X of the first vector.</param>
+        /// <param name="firstVectorY">Coordinate Y of the first vector.</param>
+        /// <param name="secondVectorX">Coordinate X of the second vector.</param>
+        /// <param name="secondVectorY">Coordinate Y of the second vector.</param>
+        /// <returns>True — <i>if the vectors are collinear,</i><br/>False — <i>if the vectors are not collinear.</i></returns>
+        public static bool AreTwoVectorsCollinear(double firstVectorX, double firstVectorY, double secondVectorX, double secondVectorY)
+        {
+            ConvertTwoVectorsABCoefficients(
+                VectorABCoefficients(firstVectorX, firstVectorY), out double a1, out double b1,
+                VectorABCoefficients(secondVectorX, secondVectorY), out double a2, out double b2);
+
+            if (Math.Abs(a1 * b2 - a2 * b1) < CalculationThreshold)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
         /// Returns result of two lines perpendicularity.
         /// </summary>
         /// <param name="firstLineX1">Coordinate X of the first line first point.</param>
@@ -204,6 +238,26 @@ namespace MathExtension
         }
 
         /// <summary>
+        /// Returns result of two vectors perpendicularity.
+        /// </summary>
+        /// <param name="firstVectorX">Coordinate X of the first vector.</param>
+        /// <param name="firstVectorY">Coordinate Y of the first vector.</param>
+        /// <param name="secondVectorX">Coordinate X of the second vector.</param>
+        /// <param name="secondVectorY">Coordinate Y of the second vector.</param>
+        /// <returns>True — <i>if the vectors are perpendicular,</i><br/>False — <i>if the vectors are not perpendicular.</i></returns>
+        public static bool AreTwoVectorsPerpendicular(double firstVectorX, double firstVectorY, double secondVectorX, double secondVectorY)
+        {
+            ConvertTwoVectorsABCoefficients(
+                VectorABCoefficients(firstVectorX, firstVectorY), out double a1, out double b1,
+                VectorABCoefficients(secondVectorX, secondVectorY), out double a2, out double b2);
+
+            if (Math.Abs(a1 * a2 + b1 * b2) < CalculationThreshold)
+                return true;
+            else
+                return false;
+        }
+
+        /// <summary>
         /// Returns an angle between two lines in degrees.
         /// </summary>
         /// <param name="firstLineX1"></param>
@@ -214,7 +268,7 @@ namespace MathExtension
         /// <param name="secondLineY1"></param>
         /// <param name="secondLineX2"></param>
         /// <param name="secondLineY2"></param>
-        /// <returns>A positive number.</returns>
+        /// <returns>A number from 0 to 90.</returns>
         public static double BetweenTwoLinesAngle(double firstLineX1, double firstLineY1, double firstLineX2, double firstLineY2,
             double secondLineX1, double secondLineY1, double secondLineX2, double secondLineY2)
         {
@@ -231,6 +285,35 @@ namespace MathExtension
                 double angleTangent = Math.Abs((a1 * b2 - a2 * b1) / denominator);
                 return Math.Atan(angleTangent) * 180 / Math.PI;
             }
+        }
+
+        /// <summary>
+        /// Returns an angle between two vectors in degrees.
+        /// </summary>
+        /// <param name="firstVectorX">Coordinate X of the first vector.</param>
+        /// <param name="firstVectorY">Coordinate Y of the first vector.</param>
+        /// <param name="secondVectorX">Coordinate X of the second vector.</param>
+        /// <param name="secondVectorY">Coordinate Y of the second vector.</param>
+        /// <returns>A number from 0 to 180.</returns>
+        public static double BetweenTwoVectorsAngle(double firstVectorX, double firstVectorY, double secondVectorX, double secondVectorY)
+        {
+            ConvertTwoVectorsABCoefficients(
+                VectorABCoefficients(firstVectorX, firstVectorY), out double a1, out double b1,
+                VectorABCoefficients(secondVectorX, secondVectorY), out double a2, out double b2);
+
+            double numerator = firstVectorX * secondVectorX + firstVectorY * secondVectorY;
+            double firstVectorLength = Math.Sqrt(firstVectorX * firstVectorX + firstVectorY * firstVectorY);
+            double secondVectorLength = Math.Sqrt(secondVectorX * secondVectorX + secondVectorY * secondVectorY);
+            double denominator = firstVectorLength * secondVectorLength;
+
+            double cosine = numerator / denominator;
+
+            if (cosine > 1)
+                cosine = 1;
+            else if (cosine < -1)
+                cosine = -1;
+
+            return Math.Acos(cosine) * 180 / Math.PI;
         }
 
         private static void ConvertOneLineABCCoefficients(double[] abcCoefficients, out double a, out double b, out double c)
@@ -267,6 +350,27 @@ namespace MathExtension
             a2 = secondLineABCCoefficients[0];
             b2 = secondLineABCCoefficients[1];
             c2 = secondLineABCCoefficients[2];
+        }
+
+        private static void ConvertTwoVectorsABCoefficients(double[] firstVectorABCoefficients, out double a1, out double b1,
+            double[] secondVectorABCoefficients, out double a2, out double b2)
+        {
+            if (firstVectorABCoefficients == null)
+                throw new ArgumentNullException(nameof(firstVectorABCoefficients));
+
+            if (secondVectorABCoefficients == null)
+                throw new ArgumentNullException(nameof(secondVectorABCoefficients));
+
+            if (firstVectorABCoefficients.Length != 2)
+                throw new ArgumentOutOfRangeException(nameof(firstVectorABCoefficients));
+
+            if (secondVectorABCoefficients.Length != 2)
+                throw new ArgumentOutOfRangeException(nameof(secondVectorABCoefficients));
+
+            a1 = firstVectorABCoefficients[0];
+            b1 = firstVectorABCoefficients[1];
+            a2 = secondVectorABCoefficients[0];
+            b2 = secondVectorABCoefficients[1];
         }
     }
 }

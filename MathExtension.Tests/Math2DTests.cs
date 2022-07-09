@@ -9,7 +9,7 @@ namespace MathExtension.Tests
     public class Math2DTests
     {
         private static double calculationThreshold = 1E-12;
-        private static double angleCalculationThreshold = 1E-8;
+        private static double angleCalculationThreshold = 1E-5;
 
         private static IEnumerable<TestCaseData> LineSegmentsAndABCCoefficientsSource()
         {
@@ -47,22 +47,30 @@ namespace MathExtension.Tests
             }
         }
 
-        private static IEnumerable<TestCaseData> LineAnglesSource()
+        private static IEnumerable<TestCaseData> VectorAnglesSource()
         {
-            if (LineSegments.Length != Result_LineAngles.Length)
+            if (Vectors.Length != Result_VectorAngles.Length)
                 throw new ArgumentException(
-                    $"{nameof(LineSegments)} and {nameof(Result_LineAngles)} lenghts are different: " +
-                    $"{LineSegments.Length}; {Result_LineAngles.Length}.");
+                    $"{nameof(Vectors)} and {nameof(Result_VectorAngles)} lenghts are different: " +
+                    $"{Vectors.Length}; {Result_VectorAngles.Length}.");
 
-            for (int i = 0; i < LineSegments.Length; i++)
-                yield return new TestCaseData(LineSegments[i], Result_LineAngles[i]);
+            if (ReversedVectors.Length != Result_ReversedVectorAngles.Length)
+                throw new ArgumentException(
+                    $"{nameof(ReversedVectors)} and {nameof(Result_ReversedVectorAngles)} lenghts are different: " +
+                    $"{ReversedVectors.Length}; {Result_ReversedVectorAngles.Length}.");
+
+            for (int i = 0; i < Vectors.Length; i++)
+                yield return new TestCaseData(Vectors[i], Result_VectorAngles[i]);
+
+            for (int i = 0; i < ReversedVectors.Length; i++)
+                yield return new TestCaseData(ReversedVectors[i], Result_ReversedVectorAngles[i]);
         }
 
-        [Test, TestCaseSource(nameof(LineAnglesSource))]
-        public void LineAngle_Values_Values(LineSegment segment, double angle)
+        [Test, TestCaseSource(nameof(VectorAnglesSource))]
+        public void VectorAngle_Values_Values(Vector vector, double angle)
         {
-            double result = Math2D.LineAngle(segment.X1, segment.Y1, segment.X2, segment.Y2);
-            Assert.True(Math.Abs(result - angle) < angleCalculationThreshold, $"{result} is not {angle}.");
+            double result = Math2D.VectorAngle(vector.X, vector.Y);
+            Assert.True(Math.Abs(result - angle) < angleCalculationThreshold, $"{result} is not {angle} (vector {vector.X}, {vector.Y}).");
         }
 
         private static IEnumerable<TestCaseData> RelativeToLinePointLocationsSource()
@@ -73,7 +81,7 @@ namespace MathExtension.Tests
         }
 
         [Test, TestCaseSource(nameof(RelativeToLinePointLocationsSource))]
-        public void RelativeToLinePointLocation_Values_Values(SinglePoint point, LineSegment line, int location)
+        public void RelativeToLinePointLocation_Values_Values(Vector point, LineSegment line, int location)
         {
             int result = Math2D.RelativeToLinePointLocation(point.X, point.Y, line.X1, line.Y1, line.X2, line.Y2);
             Assert.True(result == location, ErrorText());
@@ -99,7 +107,7 @@ namespace MathExtension.Tests
         }
 
         [Test, TestCaseSource(nameof(PointsAndLinesSource))]
-        public void BetweenPointAndLineDistance_Values_Values(SinglePoint point, LineSegment line, double distance)
+        public void BetweenPointAndLineDistance_Values_Values(Vector point, LineSegment line, double distance)
         {
             double result = Math2D.BetweenPointAndLineDistance(point.X, point.Y, line.X1, line.Y1, line.X2, line.Y2);
             Assert.True(Math.Abs(result - distance) < calculationThreshold, $"{result} is not {distance}.");
@@ -109,33 +117,32 @@ namespace MathExtension.Tests
         {
             for (int i = 0; i < LineSegments.Length - 1; i++)
                 for (int j = i + 1; j < LineSegments.Length; j++)
-                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_TwoLinesIntersectionPoints[i][j - i - 1], i, j);
+                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_TwoLinesIntersectionPoints[i][j - i - 1]);
         }
 
         [Test, TestCaseSource(nameof(TwoLinesSource))]
-        public void TwoLinesIntersectionPoint_Values_Values(LineSegment firstLine, LineSegment secondLine, SinglePoint? point,
-            int firstLineIndex, int secondLineIndex)
+        public void TwoLinesIntersectionPoint_Values_Values(LineSegment firstLine, LineSegment secondLine, Vector? point)
         {
             double[]? result = Math2D.TwoLinesIntersectionPoint(firstLine.X1, firstLine.Y1, firstLine.X2, firstLine.Y2,
                 secondLine.X1, secondLine.Y1, secondLine.X2, secondLine.Y2);
-            Assert.True((result == null && point == null)
-                || (result != null && point != null
-                    && Math.Abs(result[0] - ((SinglePoint)point).X) < calculationThreshold
-                    && Math.Abs(result[1] - ((SinglePoint)point).Y) < calculationThreshold),
-                ErrorText());
+            Assert.True(IsResultValid(), ErrorText());
+
+            bool IsResultValid()
+            {
+                return (result == null && point == null)
+                        || (result != null && point != null
+                            && Math.Abs(result[0] - ((Vector)point).X) < calculationThreshold
+                            && Math.Abs(result[1] - ((Vector)point).Y) < calculationThreshold);
+            }
 
             string ErrorText()
             {
                 if (result == null && point != null)
-                    return $"Null is not {{ {((SinglePoint)point).X}, {((SinglePoint)point).Y} }}."
-                        + Environment.NewLine + $"First line index: {firstLineIndex}, second line index: {secondLineIndex}.";
+                    return $"Null is not {{ {((Vector)point).X}, {((Vector)point).Y} }}.";
                 else if (result != null && point == null)
-                    return $"{{ {result[0]}, {result[1]} }} is not null."
-                        + Environment.NewLine + $"First line index: {firstLineIndex}, second line index: {secondLineIndex}.";
+                    return $"{{ {result[0]}, {result[1]} }} is not null.";
                 else if (result != null && point != null)
-                    return $"{{ {result[0]}, {result[1]} }} is not {{ {((SinglePoint)point).X}, {((SinglePoint)point).Y} }}."
-                        + Environment.NewLine + $"First line index: {firstLineIndex};"
-                        + Environment.NewLine + $"Second line index: {secondLineIndex}.";
+                    return $"{{ {result[0]}, {result[1]} }} is not {{ {((Vector)point).X}, {((Vector)point).Y} }}.";
                 else
                     return "Not an error.";
             }
@@ -145,74 +152,114 @@ namespace MathExtension.Tests
         {
             for (int i = 0; i < LineSegments.Length - 1; i++)
                 for (int j = i + 1; j < LineSegments.Length; j++)
-                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_AreTwoLinesParallel[i][j - i - 1], i, j);
+                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_AreTwoLinesParallel[i][j - i - 1]);
         }
 
         [Test, TestCaseSource(nameof(AreTwoLinesParallelSource))]
-        public void AreTwoLinesParallel_Values_Values(LineSegment firstLine, LineSegment secondLine, bool areMatching,
-            int firstLineIndex, int secondLineIndex)
+        public void AreTwoLinesParallel_Values_Values(LineSegment firstLine, LineSegment secondLine, bool areMatching)
         {
             bool result = Math2D.AreTwoLinesParallel(firstLine.X1, firstLine.Y1, firstLine.X2, firstLine.Y2,
                 secondLine.X1, secondLine.Y1, secondLine.X2, secondLine.Y2);
-            Assert.True(result == areMatching, TwoLineComparisonErrorText(result, areMatching, firstLineIndex, secondLineIndex));
+            Assert.True(result == areMatching, $"{result} is not {areMatching}.");
         }
 
         private static IEnumerable<TestCaseData> AreTwoLinesMatchingSource()
         {
             for (int i = 0; i < LineSegments.Length - 1; i++)
                 for (int j = i + 1; j < LineSegments.Length; j++)
-                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_AreTwoLinesMatching[i][j - i - 1], i, j);
+                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_AreTwoLinesMatching[i][j - i - 1]);
         }
 
         [Test, TestCaseSource(nameof(AreTwoLinesMatchingSource))]
-        public void AreTwoLinesMatching_Values_Values(LineSegment firstLine, LineSegment secondLine, bool areMatching,
-            int firstLineIndex, int secondLineIndex)
+        public void AreTwoLinesMatching_Values_Values(LineSegment firstLine, LineSegment secondLine, bool areMatching)
         {
             bool result = Math2D.AreTwoLinesMatching(firstLine.X1, firstLine.Y1, firstLine.X2, firstLine.Y2,
                 secondLine.X1, secondLine.Y1, secondLine.X2, secondLine.Y2);
-            Assert.True(result == areMatching, TwoLineComparisonErrorText(result, areMatching, firstLineIndex, secondLineIndex));
+            Assert.True(result == areMatching, $"{result} is not {areMatching}.");
+        }
+
+        private static IEnumerable<TestCaseData> AreTwoVectorsCollinearSource()
+        {
+            for (int i = 0; i < Vectors.Length - 1; i++)
+                for (int j = i + 1; j < Vectors.Length; j++)
+                    yield return new TestCaseData(Vectors[i], Vectors[j], Result_AreTwoLinesParallel[i][j - i - 1]);
+        }
+
+        [Test, TestCaseSource(nameof(AreTwoVectorsCollinearSource))]
+        public void AreTwoVectorsCollinear_Values_Values(Vector firstVector, Vector secondVector, bool areMatching)
+        {
+            bool result = Math2D.AreTwoVectorsCollinear(firstVector.X, firstVector.Y, secondVector.X, secondVector.Y);
+            Assert.True(result == areMatching, $"{result} is not {areMatching}.");
         }
 
         private static IEnumerable<TestCaseData> AreTwoLinesPerpendicularSource()
         {
             for (int i = 0; i < LineSegments.Length - 1; i++)
                 for (int j = i + 1; j < LineSegments.Length; j++)
-                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_AreTwoLinesPerpendicular[i][j - i - 1], i, j);
+                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_AreTwoLinesPerpendicular[i][j - i - 1]);
         }
 
         [Test, TestCaseSource(nameof(AreTwoLinesPerpendicularSource))]
-        public void AreTwoLinesPerpendicular_Values_Values(LineSegment firstLine, LineSegment secondLine, bool areMatching,
-            int firstLineIndex, int secondLineIndex)
+        public void AreTwoLinesPerpendicular_Values_Values(LineSegment firstLine, LineSegment secondLine, bool areMatching)
         {
             bool result = Math2D.AreTwoLinesPerpendicular(firstLine.X1, firstLine.Y1, firstLine.X2, firstLine.Y2,
                 secondLine.X1, secondLine.Y1, secondLine.X2, secondLine.Y2);
-            Assert.True(result == areMatching, TwoLineComparisonErrorText(result, areMatching, firstLineIndex, secondLineIndex));
+            Assert.True(result == areMatching, $"{result} is not {areMatching}.");
+        }
+
+        private static IEnumerable<TestCaseData> AreTwoVectorsPerpendicularSource()
+        {
+            for (int i = 0; i < Vectors.Length - 1; i++)
+                for (int j = i + 1; j < Vectors.Length; j++)
+                    yield return new TestCaseData(Vectors[i], Vectors[j], Result_AreTwoLinesPerpendicular[i][j - i - 1]);
+        }
+
+        [Test, TestCaseSource(nameof(AreTwoVectorsPerpendicularSource))]
+        public void AreTwoVectorsPerpendicular_Values_Values(Vector firstVector, Vector secondVector, bool areMatching)
+        {
+            bool result = Math2D.AreTwoVectorsPerpendicular(firstVector.X, firstVector.Y,
+                secondVector.X, secondVector.Y);
+            Assert.True(result == areMatching, $"{result} is not {areMatching}.");
         }
 
         private static IEnumerable<TestCaseData> BetweenTwoLinesAnglesSource()
         {
             for (int i = 0; i < LineSegments.Length - 1; i++)
                 for (int j = i + 1; j < LineSegments.Length; j++)
-                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_BetweenTwoLinesAngles[i][j - i - 1], i, j);
+                    yield return new TestCaseData(LineSegments[i], LineSegments[j], Result_BetweenTwoLinesAngles[i][j - i - 1]);
         }
 
         [Test, TestCaseSource(nameof(BetweenTwoLinesAnglesSource))]
-        public void BetweenTwoLinesAngle_Values_Values(LineSegment firstLine, LineSegment secondLine, double angle,
-            int firstLineIndex, int secondLineIndex)
+        public void BetweenTwoLinesAngle_Values_Values(LineSegment firstLine, LineSegment secondLine, double angle)
         {
             double result = Math2D.BetweenTwoLinesAngle(firstLine.X1, firstLine.Y1, firstLine.X2, firstLine.Y2,
                 secondLine.X1, secondLine.Y1, secondLine.X2, secondLine.Y2);
-            Assert.True(Math.Abs(result - angle) < angleCalculationThreshold,
-                $"{result} is not {angle}."
-                + Environment.NewLine + $"First line index: {firstLineIndex};"
-                + Environment.NewLine + $"Second line index: {secondLineIndex}.");
+            Assert.True(Math.Abs(result - angle) < angleCalculationThreshold, $"{result} is not {angle}.");
         }
 
-        private string TwoLineComparisonErrorText(bool result, bool expected, int firstLineIndex, int secondLineIndex)
+        private static IEnumerable<TestCaseData> BetweenTwoVectorsAnglesSource()
         {
-            return $"{result} is not {expected}."
-                + Environment.NewLine + $"First line index: {firstLineIndex};"
-                + Environment.NewLine + $"Second line index: {secondLineIndex}.";
+            if (Vectors.Length != ReversedVectors.Length)
+                throw new ArgumentException($"{nameof(Vectors)} and {nameof(ReversedVectors)} lenghts are different: " +
+                    $"{Vectors.Length}; {ReversedVectors.Length}.");
+
+            if (Vectors.Length != Result_BetweenTwoReversedVectorsAngles.Length)
+                throw new ArgumentException($"{nameof(Vectors)} and {nameof(Result_BetweenTwoReversedVectorsAngles)} lenghts are different: " +
+                    $"{Vectors.Length}; {Result_BetweenTwoReversedVectorsAngles.Length}.");
+
+            for (int i = 0; i < Vectors.Length; i++)
+                for (int j = 0; j < ReversedVectors.Length; j++)
+                    yield return new TestCaseData(Vectors[i], ReversedVectors[j], Result_BetweenTwoReversedVectorsAngles[i][j]);
+        }
+
+        [Test, TestCaseSource(nameof(BetweenTwoVectorsAnglesSource))]
+        public void BetweenTwoVectorsAngle_Values_Values(Vector firstVector, Vector secondVector, double angle)
+        {
+            double result = Math2D.BetweenTwoVectorsAngle(firstVector.X, firstVector.Y, secondVector.X, secondVector.Y);
+            Assert.True(Math.Abs(result - angle) < angleCalculationThreshold,
+                $"{result} is not {angle}." +
+                Environment.NewLine + $"First vector: {firstVector.X}, {firstVector.Y};" +
+                Environment.NewLine + $"Second vector: {secondVector.X}, {secondVector.Y}.");
         }
     }
 }

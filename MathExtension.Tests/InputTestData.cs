@@ -67,18 +67,22 @@
             #endregion
         };
 
-        public static SinglePoint[] SinglePoints { get; } =
+        public static Vector[] Vectors { get; }
+
+        public static Vector[] ReversedVectors { get; }
+
+        public static Vector[] SinglePoints { get; } =
         {
-            new SinglePoint(0, 0),
+            new Vector(0, 0),
 
-            new SinglePoint(1, 0),
-            new SinglePoint(-1, 1),
-            new SinglePoint(-1, -1),
+            new Vector(1, 0),
+            new Vector(-1, 1),
+            new Vector(-1, -1),
 
-            new SinglePoint(100, 0),
-            new SinglePoint(100, -1),
-            new SinglePoint(100, -2),
-            new SinglePoint(100, -3),
+            new Vector(100, 0),
+            new Vector(100, -1),
+            new Vector(100, -2),
+            new Vector(100, -3),
         };
 
         public static LineABCCoefficients[] Result_ABCCoefficients { get; } =
@@ -146,7 +150,7 @@
             #endregion
         };
 
-        public static double[] Result_LineAngles { get; private set; } =
+        public static double[] Result_VectorAngles { get; private set; } =
         {
             #region [ Passed through the origin lines ]
             // On X-axis line
@@ -154,13 +158,13 @@
             // On Y-axis line
             90, 90,
             // Passed through the origin line, at between 0 and -1 degrees to the axis X
-            -5.7298E-5, -5.7298E-5,
+            359.999942702, 359.999942702,
             // Passed through the origin line, at -11 degrees to the axis X
-            -11.309932474, -11.309932474,
+            348.690067526, 348.690067526,
             // Passed through the origin line, at -37 degrees to the axis X
-            -36.869897646, -36.869897646,
+            323.130102354, 323.130102354,
             // Passed through the origin line, at -45 degrees to the axis X
-            -45, -45,
+            135, 135,
             #endregion
 
             #region [ Axis-parallel lines ]
@@ -183,6 +187,46 @@
             36.869897646, 36.869897646,
             // Not passed through the origin line, at 45 degrees to the axis X, second quarter
             45, 45,
+            #endregion
+        };
+
+        public static double[] Result_ReversedVectorAngles { get; private set; } =
+        {
+            #region [ Passed through the origin lines ]
+            // On X-axis line
+            180, 180,
+            // On Y-axis line
+            270, 270,
+            // Passed through the origin line, at between 0 and -1 degrees to the axis X
+            179.999942702, 179.999942702,
+            // Passed through the origin line, at -11 degrees to the axis X
+            168.690067526, 168.690067526,
+            // Passed through the origin line, at -37 degrees to the axis X
+            143.130102354, 143.130102354,
+            // Passed through the origin line, at -45 degrees to the axis X
+            315, 315,
+            #endregion
+
+            #region [ Axis-parallel lines ]
+            // X-axis-parallel line, above X-axis
+            180, 180,
+            // X-axis-parallel line, below X-axis
+            180, 180,
+            // Y-axis-parallel line, right-hand from Y-axis
+            270, 270,
+            // Y-axis-parallel line, left-hand from Y-axis
+            270, 270,
+            #endregion
+
+            #region [ Not passed through the origin lines, second quarter ]
+            // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
+            180.000057298, 180.000057298,
+            // Not passed through the origin line, at 11 degrees to the axis X, second quarter
+            191.309932474, 191.309932474,
+            // Not passed through the origin line, at 37 degrees to the axis X, second quarter
+            216.869897646, 216.869897646,
+            // Not passed through the origin line, at 45 degrees to the axis X, second quarter
+            225, 225,
             #endregion
         };
 
@@ -834,29 +878,29 @@
             },
         };
 
-        public static SinglePoint?[][] Result_TwoLinesIntersectionPoints { get; } =
+        public static Vector?[][] Result_TwoLinesIntersectionPoints { get; } =
         {
             // On X-axis first line
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // On X-axis line
                 null,
                 // On Y-axis line
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -11 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
 
                 #region [ Axis-parallel second line ]
@@ -867,47 +911,47 @@
                 null,
                 null,
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, 0),
-                new SinglePoint(1, 0),
+                new Vector(1, 0),
+                new Vector(1, 0),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 0),
-                new SinglePoint(-1, 0),
+                new Vector(-1, 0),
+                new Vector(-1, 0),
                 #endregion
 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1000001, 0),
-                new SinglePoint(-1000001, 0),
+                new Vector(-1000001, 0),
+                new Vector(-1000001, 0),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-6, 0),
-                new SinglePoint(-6, 0),
+                new Vector(-6, 0),
+                new Vector(-6, 0),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-2.333333333333333, 0),
-                new SinglePoint(-2.333333333333333, 0),
+                new Vector(-2.333333333333333, 0),
+                new Vector(-2.333333333333333, 0),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-2, 0),
-                new SinglePoint(-2, 0),
+                new Vector(-2, 0),
+                new Vector(-2, 0),
                 #endregion
             },
             // On X-axis first line
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // On Y-axis line
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -11 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
 
                 #region [ Axis-parallel second line ]
@@ -918,55 +962,55 @@
                 null,
                 null,
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, 0),
-                new SinglePoint(1, 0),
+                new Vector(1, 0),
+                new Vector(1, 0),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 0),
-                new SinglePoint(-1, 0),
+                new Vector(-1, 0),
+                new Vector(-1, 0),
                 #endregion
 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1000001, 0),
-                new SinglePoint(-1000001, 0),
+                new Vector(-1000001, 0),
+                new Vector(-1000001, 0),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-6, 0),
-                new SinglePoint(-6, 0),
+                new Vector(-6, 0),
+                new Vector(-6, 0),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-2.333333333333333, 0),
-                new SinglePoint(-2.333333333333333, 0),
+                new Vector(-2.333333333333333, 0),
+                new Vector(-2.333333333333333, 0),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-2, 0),
-                new SinglePoint(-2, 0),
+                new Vector(-2, 0),
+                new Vector(-2, 0),
                 #endregion
             },
             // On Y-axis first line
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // On Y-axis line
                 null,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -11 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(0, 1),
-                new SinglePoint(0, 1),
+                new Vector(0, 1),
+                new Vector(0, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(0, -1),
-                new SinglePoint(0, -1),
+                new Vector(0, -1),
+                new Vector(0, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
                 null,
                 null,
@@ -977,44 +1021,44 @@
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(0, 1.000001),
-                new SinglePoint(0, 1.000001),
+                new Vector(0, 1.000001),
+                new Vector(0, 1.000001),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(0, 1.2),
-                new SinglePoint(0, 1.2),
+                new Vector(0, 1.2),
+                new Vector(0, 1.2),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(0, 1.75),
-                new SinglePoint(0, 1.75),
+                new Vector(0, 1.75),
+                new Vector(0, 1.75),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(0, 2),
-                new SinglePoint(0, 2),
+                new Vector(0, 2),
+                new Vector(0, 2),
                 #endregion
             },
             // On Y-axis first line
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -11 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(0, 1),
-                new SinglePoint(0, 1),
+                new Vector(0, 1),
+                new Vector(0, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(0, -1),
-                new SinglePoint(0, -1),
+                new Vector(0, -1),
+                new Vector(0, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
                 null,
                 null,
@@ -1025,279 +1069,279 @@
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(0, 1.000001),
-                new SinglePoint(0, 1.000001),
+                new Vector(0, 1.000001),
+                new Vector(0, 1.000001),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(0, 1.2),
-                new SinglePoint(0, 1.2),
+                new Vector(0, 1.2),
+                new Vector(0, 1.2),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(0, 1.75),
-                new SinglePoint(0, 1.75),
+                new Vector(0, 1.75),
+                new Vector(0, 1.75),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(0, 2),
-                new SinglePoint(0, 2),
+                new Vector(0, 2),
+                new Vector(0, 2),
                 #endregion
             },
             // Passed through the origin first line, at between 0 and -1 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
                 null,
                 // Passed through the origin line, at -11 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-1000000, 1),
-                new SinglePoint(-1000000, 1),
+                new Vector(-1000000, 1),
+                new Vector(-1000000, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(1000000, -1),
-                new SinglePoint(1000000, -1),
+                new Vector(1000000, -1),
+                new Vector(1000000, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -1E-6),
-                new SinglePoint(1, -1E-6),
+                new Vector(1, -1E-6),
+                new Vector(1, -1E-6),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 1E-6),
-                new SinglePoint(-1, 1E-6),
+                new Vector(-1, 1E-6),
+                new Vector(-1, 1E-6),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-500000.5, 0.5000005),
-                new SinglePoint(-500000.5, 0.5000005),
+                new Vector(-500000.5, 0.5000005),
+                new Vector(-500000.5, 0.5000005),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-5.99997000015, 5.99997000015E-6),
-                new SinglePoint(-5.99997000015, 5.99997000015E-6),
+                new Vector(-5.99997000015, 5.99997000015E-6),
+                new Vector(-5.99997000015, 5.99997000015E-6),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-2.333330222226, 2.333330222226E-6),
-                new SinglePoint(-2.333330222226, 2.333330222226E-6),
+                new Vector(-2.333330222226, 2.333330222226E-6),
+                new Vector(-2.333330222226, 2.333330222226E-6),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1.999998000002, 1.999998000002E-6),
-                new SinglePoint(-1.999998000002, 1.999998000002E-6),
+                new Vector(-1.999998000002, 1.999998000002E-6),
+                new Vector(-1.999998000002, 1.999998000002E-6),
                 #endregion
             },
             // Passed through the origin first line, at between 0 and -1 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at -11 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-1000000, 1),
-                new SinglePoint(-1000000, 1),
+                new Vector(-1000000, 1),
+                new Vector(-1000000, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(1000000, -1),
-                new SinglePoint(1000000, -1),
+                new Vector(1000000, -1),
+                new Vector(1000000, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -1E-6),
-                new SinglePoint(1, -1E-6),
+                new Vector(1, -1E-6),
+                new Vector(1, -1E-6),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 1E-6),
-                new SinglePoint(-1, 1E-6),
+                new Vector(-1, 1E-6),
+                new Vector(-1, 1E-6),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-500000.5, 0.5000005),
-                new SinglePoint(-500000.5, 0.5000005),
+                new Vector(-500000.5, 0.5000005),
+                new Vector(-500000.5, 0.5000005),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-5.99997000015, 5.99997000015E-6),
-                new SinglePoint(-5.99997000015, 5.99997000015E-6),
+                new Vector(-5.99997000015, 5.99997000015E-6),
+                new Vector(-5.99997000015, 5.99997000015E-6),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-2.333330222226, 2.333330222226E-6),
-                new SinglePoint(-2.333330222226, 2.333330222226E-6),
+                new Vector(-2.333330222226, 2.333330222226E-6),
+                new Vector(-2.333330222226, 2.333330222226E-6),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1.999998000002, 1.999998000002E-6),
-                new SinglePoint(-1.999998000002, 1.999998000002E-6),
+                new Vector(-1.999998000002, 1.999998000002E-6),
+                new Vector(-1.999998000002, 1.999998000002E-6),
                 #endregion
             },
             // Passed through the origin first line, at -11 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at -11 degrees to the axis X
                 null,
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-5, 1),
-                new SinglePoint(-5, 1),
+                new Vector(-5, 1),
+                new Vector(-5, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(5, -1),
-                new SinglePoint(5, -1),
+                new Vector(5, -1),
+                new Vector(5, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -0.2),
-                new SinglePoint(1, -0.2),
+                new Vector(1, -0.2),
+                new Vector(1, -0.2),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 0.2),
-                new SinglePoint(-1, 0.2),
+                new Vector(-1, 0.2),
+                new Vector(-1, 0.2),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-4.9999800001, 0.99999600002),
-                new SinglePoint(-4.9999800001, 0.99999600002),
+                new Vector(-4.9999800001, 0.99999600002),
+                new Vector(-4.9999800001, 0.99999600002),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-3, 0.6),
-                new SinglePoint(-3, 0.6),
+                new Vector(-3, 0.6),
+                new Vector(-3, 0.6),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1.842105263158, 0.3684210526316),
-                new SinglePoint(-1.842105263158, 0.3684210526316),
+                new Vector(-1.842105263158, 0.3684210526316),
+                new Vector(-1.842105263158, 0.3684210526316),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1.666666666667, 0.3333333333333),
-                new SinglePoint(-1.666666666667, 0.3333333333333),
+                new Vector(-1.666666666667, 0.3333333333333),
+                new Vector(-1.666666666667, 0.3333333333333),
                 #endregion
             },
             // Passed through the origin first line, at -11 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at -37 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-5, 1),
-                new SinglePoint(-5, 1),
+                new Vector(-5, 1),
+                new Vector(-5, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(5, -1),
-                new SinglePoint(5, -1),
+                new Vector(5, -1),
+                new Vector(5, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -0.2),
-                new SinglePoint(1, -0.2),
+                new Vector(1, -0.2),
+                new Vector(1, -0.2),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 0.2),
-                new SinglePoint(-1, 0.2),
+                new Vector(-1, 0.2),
+                new Vector(-1, 0.2),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-4.9999800001, 0.99999600002),
-                new SinglePoint(-4.9999800001, 0.99999600002),
+                new Vector(-4.9999800001, 0.99999600002),
+                new Vector(-4.9999800001, 0.99999600002),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-3, 0.6),
-                new SinglePoint(-3, 0.6),
+                new Vector(-3, 0.6),
+                new Vector(-3, 0.6),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1.842105263158, 0.3684210526316),
-                new SinglePoint(-1.842105263158, 0.3684210526316),
+                new Vector(-1.842105263158, 0.3684210526316),
+                new Vector(-1.842105263158, 0.3684210526316),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1.666666666667, 0.3333333333333),
-                new SinglePoint(-1.666666666667, 0.3333333333333),
+                new Vector(-1.666666666667, 0.3333333333333),
+                new Vector(-1.666666666667, 0.3333333333333),
                 #endregion
             },
             // Passed through the origin first line, at -37 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at -37 degrees to the axis X
                 null,
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-1.333333333333333, 1),
-                new SinglePoint(-1.333333333333333, 1),
+                new Vector(-1.333333333333333, 1),
+                new Vector(-1.333333333333333, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(1.333333333333333, -1),
-                new SinglePoint(1.333333333333333, -1),
+                new Vector(1.333333333333333, -1),
+                new Vector(1.333333333333333, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -0.75),
-                new SinglePoint(1, -0.75),
+                new Vector(1, -0.75),
+                new Vector(1, -0.75),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 0.75),
-                new SinglePoint(-1, 0.75),
+                new Vector(-1, 0.75),
+                new Vector(-1, 0.75),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1.333332888889, 0.9999996666671),
-                new SinglePoint(-1.333332888889, 0.9999996666671),
+                new Vector(-1.333332888889, 0.9999996666671),
+                new Vector(-1.333332888889, 0.9999996666671),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1.263157894737, 0.9473684210526),
-                new SinglePoint(-1.263157894737, 0.9473684210526),
+                new Vector(-1.263157894737, 0.9473684210526),
+                new Vector(-1.263157894737, 0.9473684210526),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1.166666666667, 0.875),
-                new SinglePoint(-1.166666666667, 0.875),
+                new Vector(-1.166666666667, 0.875),
+                new Vector(-1.166666666667, 0.875),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1.142857142857, 0.8571428571429),
-                new SinglePoint(-1.142857142857, 0.8571428571429),
+                new Vector(-1.142857142857, 0.8571428571429),
+                new Vector(-1.142857142857, 0.8571428571429),
                 #endregion
             },
             // Passed through the origin first line, at -37 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at -45 degrees to the axis X
-                new SinglePoint(0, 0),
-                new SinglePoint(0, 0),
+                new Vector(0, 0),
+                new Vector(0, 0),
                 #endregion
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-1.333333333333333, 1),
-                new SinglePoint(-1.333333333333333, 1),
+                new Vector(-1.333333333333333, 1),
+                new Vector(-1.333333333333333, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(1.333333333333333, -1),
-                new SinglePoint(1.333333333333333, -1),
+                new Vector(1.333333333333333, -1),
+                new Vector(1.333333333333333, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -0.75),
-                new SinglePoint(1, -0.75),
+                new Vector(1, -0.75),
+                new Vector(1, -0.75),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 0.75),
-                new SinglePoint(-1, 0.75),
+                new Vector(-1, 0.75),
+                new Vector(-1, 0.75),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1.333332888889, 0.9999996666671),
-                new SinglePoint(-1.333332888889, 0.9999996666671),
+                new Vector(-1.333332888889, 0.9999996666671),
+                new Vector(-1.333332888889, 0.9999996666671),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1.263157894737, 0.9473684210526),
-                new SinglePoint(-1.263157894737, 0.9473684210526),
+                new Vector(-1.263157894737, 0.9473684210526),
+                new Vector(-1.263157894737, 0.9473684210526),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1.166666666667, 0.875),
-                new SinglePoint(-1.166666666667, 0.875),
+                new Vector(-1.166666666667, 0.875),
+                new Vector(-1.166666666667, 0.875),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1.142857142857, 0.8571428571429),
-                new SinglePoint(-1.142857142857, 0.8571428571429),
+                new Vector(-1.142857142857, 0.8571428571429),
+                new Vector(-1.142857142857, 0.8571428571429),
                 #endregion
             },
             // Passed through the origin first line, at -45 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Passed through the origin second line ]
                 // Passed through the origin line, at -45 degrees to the axis X
@@ -1306,69 +1350,69 @@
                 
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(1, -1),
-                new SinglePoint(1, -1),
+                new Vector(1, -1),
+                new Vector(1, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -1),
-                new SinglePoint(1, -1),
+                new Vector(1, -1),
+                new Vector(1, -1),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Passed through the origin first line, at -45 degrees to the axis X
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // X-axis-parallel line, below X-axis
-                new SinglePoint(1, -1),
-                new SinglePoint(1, -1),
+                new Vector(1, -1),
+                new Vector(1, -1),
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -1),
-                new SinglePoint(1, -1),
+                new Vector(1, -1),
+                new Vector(1, -1),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // X-axis-parallel first line, above X-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, above X-axis
@@ -1377,116 +1421,116 @@
                 null,
                 null,
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, 1),
-                new SinglePoint(1, 1),
+                new Vector(1, 1),
+                new Vector(1, 1),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // X-axis-parallel first line, above X-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, below X-axis
                 null,
                 null,
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, 1),
-                new SinglePoint(1, 1),
+                new Vector(1, 1),
+                new Vector(1, 1),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // X-axis-parallel first line, below X-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // X-axis-parallel line, below X-axis
                 null,
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -1),
-                new SinglePoint(1, -1),
+                new Vector(1, -1),
+                new Vector(1, -1),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, -1),
-                new SinglePoint(-1, -1),
+                new Vector(-1, -1),
+                new Vector(-1, -1),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-2000001, -1),
-                new SinglePoint(-2000001, -1),
+                new Vector(-2000001, -1),
+                new Vector(-2000001, -1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-11, -1),
-                new SinglePoint(-11, -1),
+                new Vector(-11, -1),
+                new Vector(-11, -1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-3.666666666667, -1),
-                new SinglePoint(-3.666666666667, -1),
+                new Vector(-3.666666666667, -1),
+                new Vector(-3.666666666667, -1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-3, -1),
-                new SinglePoint(-3, -1),
+                new Vector(-3, -1),
+                new Vector(-3, -1),
                 #endregion
             },
             // X-axis-parallel first line, below X-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // Y-axis-parallel line, right-hand from Y-axis
-                new SinglePoint(1, -1),
-                new SinglePoint(1, -1),
+                new Vector(1, -1),
+                new Vector(1, -1),
                 // Y-axis-parallel line, left-hand from Y-axis
-                new SinglePoint(-1, -1),
-                new SinglePoint(-1, -1),
+                new Vector(-1, -1),
+                new Vector(-1, -1),
                 #endregion
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-2000001, -1),
-                new SinglePoint(-2000001, -1),
+                new Vector(-2000001, -1),
+                new Vector(-2000001, -1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-11, -1),
-                new SinglePoint(-11, -1),
+                new Vector(-11, -1),
+                new Vector(-11, -1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-3.666666666667, -1),
-                new SinglePoint(-3.666666666667, -1),
+                new Vector(-3.666666666667, -1),
+                new Vector(-3.666666666667, -1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-3, -1),
-                new SinglePoint(-3, -1),
+                new Vector(-3, -1),
+                new Vector(-3, -1),
                 #endregion
             },
             // Y-axis-parallel first line, right-hand from Y-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // Y-axis-parallel line, right-hand from Y-axis
@@ -1498,21 +1542,21 @@
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(1, 1.000002),
-                new SinglePoint(1, 1.000002),
+                new Vector(1, 1.000002),
+                new Vector(1, 1.000002),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(1, 1.4),
-                new SinglePoint(1, 1.4),
+                new Vector(1, 1.4),
+                new Vector(1, 1.4),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(1, 2.5),
-                new SinglePoint(1, 2.5),
+                new Vector(1, 2.5),
+                new Vector(1, 2.5),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(1, 3),
-                new SinglePoint(1, 3),
+                new Vector(1, 3),
+                new Vector(1, 3),
                 #endregion
             },
             // Y-axis-parallel first line, right-hand from Y-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // Y-axis-parallel line, left-hand from Y-axis
@@ -1522,21 +1566,21 @@
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(1, 1.000002),
-                new SinglePoint(1, 1.000002),
+                new Vector(1, 1.000002),
+                new Vector(1, 1.000002),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(1, 1.4),
-                new SinglePoint(1, 1.4),
+                new Vector(1, 1.4),
+                new Vector(1, 1.4),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(1, 2.5),
-                new SinglePoint(1, 2.5),
+                new Vector(1, 2.5),
+                new Vector(1, 2.5),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(1, 3),
-                new SinglePoint(1, 3),
+                new Vector(1, 3),
+                new Vector(1, 3),
                 #endregion
             },
             // Y-axis-parallel first line, left-hand from Y-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Axis-parallel second line ]
                 // Y-axis-parallel line, left-hand from Y-axis
@@ -1545,117 +1589,117 @@
                 
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Y-axis-parallel first line, left-hand from Y-axis
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at between 0 and 1 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
                 null,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at between 0 and 1 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at 11 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
                 null,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at 11 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at 37 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
                 null,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at 37 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                new SinglePoint(-1, 1),
-                new SinglePoint(-1, 1),
+                new Vector(-1, 1),
+                new Vector(-1, 1),
                 #endregion
             },
             // Not passed through the origin first line, at 45 degrees to the axis X, second quarter
-            new SinglePoint?[]
+            new Vector?[]
             {
                 #region [ Not passed through the origin second line, second quarter ]
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
@@ -2501,6 +2545,1142 @@
             },
         };
 
+        public static double[][] Result_BetweenTwoReversedVectorsAngles { get; } =
+        {
+            // On X-axis first line vector
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                180, 180,
+                // On Y-axis line
+                90, 90,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999942702, 179.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690067526, 168.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130102354, 143.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45, 45,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                180, 180,
+                // X-axis-parallel line, below X-axis
+                180, 180,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90, 90,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90, 90,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999942702, 179.999942702,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690067526, 168.690067526,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130102354, 143.130102354,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On X-axis first line vector
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                180, 180,
+                // On Y-axis line
+                90, 90,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999942702, 179.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690067526, 168.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130102354, 143.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45, 45,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                180, 180,
+                // X-axis-parallel line, below X-axis
+                180, 180,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90, 90,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90, 90,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999942702, 179.999942702,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690067526, 168.690067526,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130102354, 143.130102354,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On Y-axis first line vector
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                90, 90,
+                // On Y-axis line
+                180, 180,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                135, 135,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                90, 90,
+                // X-axis-parallel line, below X-axis
+                90, 90,
+                // Y-axis-parallel line, right-hand from Y-axis
+                180, 180,
+                // Y-axis-parallel line, left-hand from Y-axis
+                180, 180,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                90.000057298, 90.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                101.309932474, 101.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                126.869897646, 126.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On Y-axis first line vector
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                90, 90,
+                // On Y-axis line
+                180, 180,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                135, 135,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                90, 90,
+                // X-axis-parallel line, below X-axis
+                90, 90,
+                // Y-axis-parallel line, right-hand from Y-axis
+                180, 180,
+                // Y-axis-parallel line, left-hand from Y-axis
+                180, 180,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                90.000057298, 90.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                101.309932474, 101.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                126.869897646, 126.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On passed through the origin first line vector, at between 0 and -1 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                179.999942702, 179.999942702,
+                // On Y-axis line
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                180, 180,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690124824, 168.690124824,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130159652, 143.130159652,
+                // Passed through the origin line, at -45 degrees to the axis X
+                44.999942702, 44.999942702,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                179.999942702, 179.999942702,
+                // X-axis-parallel line, below X-axis
+                179.999942702, 179.999942702,
+                // Y-axis-parallel line, right-hand from Y-axis
+                89.999942702, 89.999942702,
+                // Y-axis-parallel line, left-hand from Y-axis
+                89.999942702, 89.999942702,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999885404, 179.999885404,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690010228, 168.690010228,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130045056, 143.130045056,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                134.999942702, 134.999942702,
+                #endregion
+            },
+            // On passed through the origin first line vector, at between 0 and -1 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                179.999942702, 179.999942702,
+                // On Y-axis line
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                180, 180,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690124824, 168.690124824,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130159652, 143.130159652,
+                // Passed through the origin line, at -45 degrees to the axis X
+                44.999942702, 44.999942702,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                179.999942702, 179.999942702,
+                // X-axis-parallel line, below X-axis
+                179.999942702, 179.999942702,
+                // Y-axis-parallel line, right-hand from Y-axis
+                89.999942702, 89.999942702,
+                // Y-axis-parallel line, left-hand from Y-axis
+                89.999942702, 89.999942702,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999885404, 179.999885404,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690010228, 168.690010228,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130045056, 143.130045056,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                134.999942702, 134.999942702,
+                #endregion
+            },
+            // On passed through the origin first line vector, at -11 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                168.690067526, 168.690067526,
+                // On Y-axis line
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                168.690124824, 168.690124824,
+                // Passed through the origin line, at -11 degrees to the axis X
+                180, 180,
+                // Passed through the origin line, at -37 degrees to the axis X
+                154.440034828, 154.440034828,
+                // Passed through the origin line, at -45 degrees to the axis X
+                33.690067526, 33.690067526,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                168.690067526, 168.690067526,
+                // X-axis-parallel line, below X-axis
+                168.690067526, 168.690067526,
+                // Y-axis-parallel line, right-hand from Y-axis
+                78.690067526, 78.690067526,
+                // Y-axis-parallel line, left-hand from Y-axis
+                78.690067526, 78.690067526,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                168.690010228, 168.690010228,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                157.380135052, 157.380135052,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                131.82016988, 131.82016988,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                123.690067526, 123.690067526,
+                #endregion
+            },
+            // On passed through the origin first line vector, at -11 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                168.690067526, 168.690067526,
+                // On Y-axis line
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                168.690124824, 168.690124824,
+                // Passed through the origin line, at -11 degrees to the axis X
+                180, 180,
+                // Passed through the origin line, at -37 degrees to the axis X
+                154.440034828, 154.440034828,
+                // Passed through the origin line, at -45 degrees to the axis X
+                33.690067526, 33.690067526,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                168.690067526, 168.690067526,
+                // X-axis-parallel line, below X-axis
+                168.690067526, 168.690067526,
+                // Y-axis-parallel line, right-hand from Y-axis
+                78.690067526, 78.690067526,
+                // Y-axis-parallel line, left-hand from Y-axis
+                78.690067526, 78.690067526,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                168.690010228, 168.690010228,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                157.380135052, 157.380135052,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                131.82016988, 131.82016988,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                123.690067526, 123.690067526,
+                #endregion
+            },
+            // On passed through the origin first line vector, at -37 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                143.130102354, 143.130102354,
+                // On Y-axis line
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                143.130159652, 143.130159652,
+                // Passed through the origin line, at -11 degrees to the axis X
+                154.440034828, 154.440034828,
+                // Passed through the origin line, at -37 degrees to the axis X
+                180, 180,
+                // Passed through the origin line, at -45 degrees to the axis X
+                8.130102354, 8.130102354,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                143.130102354, 143.130102354,
+                // X-axis-parallel line, below X-axis
+                143.130102354, 143.130102354,
+                // Y-axis-parallel line, right-hand from Y-axis
+                53.130102354, 53.130102354,
+                // Y-axis-parallel line, left-hand from Y-axis
+                53.130102354, 53.130102354,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                143.130045056, 143.130045056,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                131.82016988, 131.82016988,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                106.260204708, 106.260204708,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                98.130102354, 98.130102354,
+                #endregion
+            },
+            // On passed through the origin first line vector, at -37 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                143.130102354, 143.130102354,
+                // On Y-axis line
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                143.130159652, 143.130159652,
+                // Passed through the origin line, at -11 degrees to the axis X
+                154.440034828, 154.440034828,
+                // Passed through the origin line, at -37 degrees to the axis X
+                180, 180,
+                // Passed through the origin line, at -45 degrees to the axis X
+                8.130102354, 8.130102354,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                143.130102354, 143.130102354,
+                // X-axis-parallel line, below X-axis
+                143.130102354, 143.130102354,
+                // Y-axis-parallel line, right-hand from Y-axis
+                53.130102354, 53.130102354,
+                // Y-axis-parallel line, left-hand from Y-axis
+                53.130102354, 53.130102354,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                143.130045056, 143.130045056,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                131.82016988, 131.82016988,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                106.260204708, 106.260204708,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                98.130102354, 98.130102354,
+                #endregion
+            },
+            // On passed through the origin first line vector, at -45 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                45, 45,
+                // On Y-axis line
+                135, 135,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                44.999942702, 44.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                33.690067526, 33.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                8.130102354, 8.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                180, 180,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                45, 45,
+                // X-axis-parallel line, below X-axis
+                45, 45,
+                // Y-axis-parallel line, right-hand from Y-axis
+                135, 135,
+                // Y-axis-parallel line, left-hand from Y-axis
+                135, 135,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                45.000057298, 45.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                56.309932474, 56.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                81.869897646, 81.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                90, 90,
+                #endregion
+            },
+            // On passed through the origin first line vector, at -45 degrees to the axis X
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                45, 45,
+                // On Y-axis line
+                135, 135,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                44.999942702, 44.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                33.690067526, 33.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                8.130102354, 8.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                180, 180,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                45, 45,
+                // X-axis-parallel line, below X-axis
+                45, 45,
+                // Y-axis-parallel line, right-hand from Y-axis
+                135, 135,
+                // Y-axis-parallel line, left-hand from Y-axis
+                135, 135,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                45.000057298, 45.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                56.309932474, 56.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                81.869897646, 81.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                90, 90,
+                #endregion
+            },
+            // On X-axis-parallel first line vector, above X-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                180, 180,
+                // On Y-axis line
+                90, 90,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999942702, 179.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690067526, 168.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130102354, 143.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45, 45,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                180, 180,
+                // X-axis-parallel line, below X-axis
+                180, 180,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90, 90,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90, 90,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999942702, 179.999942702,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690067526, 168.690067526,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130102354, 143.130102354,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On X-axis-parallel first line vector, above X-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                180, 180,
+                // On Y-axis line
+                90, 90,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999942702, 179.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690067526, 168.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130102354, 143.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45, 45,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                180, 180,
+                // X-axis-parallel line, below X-axis
+                180, 180,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90, 90,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90, 90,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999942702, 179.999942702,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690067526, 168.690067526,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130102354, 143.130102354,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On X-axis-parallel first line vector, below X-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                180, 180,
+                // On Y-axis line
+                90, 90,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999942702, 179.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690067526, 168.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130102354, 143.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45, 45,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                180, 180,
+                // X-axis-parallel line, below X-axis
+                180, 180,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90, 90,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90, 90,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999942702, 179.999942702,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690067526, 168.690067526,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130102354, 143.130102354,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On X-axis-parallel first line vector, below X-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                180, 180,
+                // On Y-axis line
+                90, 90,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999942702, 179.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690067526, 168.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130102354, 143.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45, 45,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                180, 180,
+                // X-axis-parallel line, below X-axis
+                180, 180,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90, 90,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90, 90,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                179.999942702, 179.999942702,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690067526, 168.690067526,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130102354, 143.130102354,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On Y-axis-parallel first line vector, right-hand from Y-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                90, 90,
+                // On Y-axis line
+                180, 180,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                135, 135,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                90, 90,
+                // X-axis-parallel line, below X-axis
+                90, 90,
+                // Y-axis-parallel line, right-hand from Y-axis
+                180, 180,
+                // Y-axis-parallel line, left-hand from Y-axis
+                180, 180,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                90.000057298, 90.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                101.309932474, 101.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                126.869897646, 126.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On Y-axis-parallel first line vector, right-hand from Y-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                90, 90,
+                // On Y-axis line
+                180, 180,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                135, 135,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                90, 90,
+                // X-axis-parallel line, below X-axis
+                90, 90,
+                // Y-axis-parallel line, right-hand from Y-axis
+                180, 180,
+                // Y-axis-parallel line, left-hand from Y-axis
+                180, 180,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                90.000057298, 90.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                101.309932474, 101.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                126.869897646, 126.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On Y-axis-parallel first line vector, left-hand from Y-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                90, 90,
+                // On Y-axis line
+                180, 180,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                135, 135,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                90, 90,
+                // X-axis-parallel line, below X-axis
+                90, 90,
+                // Y-axis-parallel line, right-hand from Y-axis
+                180, 180,
+                // Y-axis-parallel line, left-hand from Y-axis
+                180, 180,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                90.000057298, 90.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                101.309932474, 101.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                126.869897646, 126.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On Y-axis-parallel first line vector, left-hand from Y-axis
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                90, 90,
+                // On Y-axis line
+                180, 180,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                89.999942702, 89.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                78.690067526, 78.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                53.130102354, 53.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                135, 135,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                90, 90,
+                // X-axis-parallel line, below X-axis
+                90, 90,
+                // Y-axis-parallel line, right-hand from Y-axis
+                180, 180,
+                // Y-axis-parallel line, left-hand from Y-axis
+                180, 180,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                90.000057298, 90.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                101.309932474, 101.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                126.869897646, 126.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135, 135,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at between 0 and 1 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                179.999942702, 179.999942702,
+                // On Y-axis line
+                90.000057298, 90.000057298,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999885404, 179.999885404,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690010228, 168.690010228,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130045056, 143.130045056,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45.000057298, 45.000057298,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                179.999942702, 179.999942702,
+                // X-axis-parallel line, below X-axis
+                179.999942702, 179.999942702,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90.000057298, 90.000057298,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90.000057298, 90.000057298,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                180, 180,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690124824, 168.690124824,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130159652, 143.130159652,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135.000057298, 135.000057298,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at between 0 and 1 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                179.999942702, 179.999942702,
+                // On Y-axis line
+                90.000057298, 90.000057298,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                179.999885404, 179.999885404,
+                // Passed through the origin line, at -11 degrees to the axis X
+                168.690010228, 168.690010228,
+                // Passed through the origin line, at -37 degrees to the axis X
+                143.130045056, 143.130045056,
+                // Passed through the origin line, at -45 degrees to the axis X
+                45.000057298, 45.000057298,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                179.999942702, 179.999942702,
+                // X-axis-parallel line, below X-axis
+                179.999942702, 179.999942702,
+                // Y-axis-parallel line, right-hand from Y-axis
+                90.000057298, 90.000057298,
+                // Y-axis-parallel line, left-hand from Y-axis
+                90.000057298, 90.000057298,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                180, 180,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                168.690124824, 168.690124824,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                143.130159652, 143.130159652,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                135.000057298, 135.000057298,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at 11 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                168.690067526, 168.690067526,
+                // On Y-axis line
+                101.309932474, 101.309932474,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                168.690010228, 168.690010228,
+                // Passed through the origin line, at -11 degrees to the axis X
+                157.380135052, 157.380135052,
+                // Passed through the origin line, at -37 degrees to the axis X
+                131.82016988, 131.82016988,
+                // Passed through the origin line, at -45 degrees to the axis X
+                56.309932474, 56.309932474,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                168.690067526, 168.690067526,
+                // X-axis-parallel line, below X-axis
+                168.690067526, 168.690067526,
+                // Y-axis-parallel line, right-hand from Y-axis
+                101.309932474, 101.309932474,
+                // Y-axis-parallel line, left-hand from Y-axis
+                101.309932474, 101.309932474,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                168.690124824, 168.690124824,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                180, 180,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                154.440034828, 154.440034828,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                146.309932474, 146.309932474,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at 11 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                168.690067526, 168.690067526,
+                // On Y-axis line
+                101.309932474, 101.309932474,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                168.690010228, 168.690010228,
+                // Passed through the origin line, at -11 degrees to the axis X
+                157.380135052, 157.380135052,
+                // Passed through the origin line, at -37 degrees to the axis X
+                131.82016988, 131.82016988,
+                // Passed through the origin line, at -45 degrees to the axis X
+                56.309932474, 56.309932474,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                168.690067526, 168.690067526,
+                // X-axis-parallel line, below X-axis
+                168.690067526, 168.690067526,
+                // Y-axis-parallel line, right-hand from Y-axis
+                101.309932474, 101.309932474,
+                // Y-axis-parallel line, left-hand from Y-axis
+                101.309932474, 101.309932474,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                168.690124824, 168.690124824,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                180, 180,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                154.440034828, 154.440034828,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                146.309932474, 146.309932474,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at 37 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                143.130102354, 143.130102354,
+                // On Y-axis line
+                126.869897646, 126.869897646,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                143.130045056, 143.130045056,
+                // Passed through the origin line, at -11 degrees to the axis X
+                131.82016988, 131.82016988,
+                // Passed through the origin line, at -37 degrees to the axis X
+                106.260204708, 106.260204708,
+                // Passed through the origin line, at -45 degrees to the axis X
+                81.869897646, 81.869897646,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                143.130102354, 143.130102354,
+                // X-axis-parallel line, below X-axis
+                143.130102354, 143.130102354,
+                // Y-axis-parallel line, right-hand from Y-axis
+                126.869897646, 126.869897646,
+                // Y-axis-parallel line, left-hand from Y-axis
+                126.869897646, 126.869897646,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                143.130159652, 143.130159652,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                154.440034828, 154.440034828,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                180, 180,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                171.869897646, 171.869897646,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at 37 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                143.130102354, 143.130102354,
+                // On Y-axis line
+                126.869897646, 126.869897646,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                143.130045056, 143.130045056,
+                // Passed through the origin line, at -11 degrees to the axis X
+                131.82016988, 131.82016988,
+                // Passed through the origin line, at -37 degrees to the axis X
+                106.260204708, 106.260204708,
+                // Passed through the origin line, at -45 degrees to the axis X
+                81.869897646, 81.869897646,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                143.130102354, 143.130102354,
+                // X-axis-parallel line, below X-axis
+                143.130102354, 143.130102354,
+                // Y-axis-parallel line, right-hand from Y-axis
+                126.869897646, 126.869897646,
+                // Y-axis-parallel line, left-hand from Y-axis
+                126.869897646, 126.869897646,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                143.130159652, 143.130159652,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                154.440034828, 154.440034828,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                180, 180,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                171.869897646, 171.869897646,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at 45 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                135, 135,
+                // On Y-axis line
+                135, 135,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                134.999942702, 134.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                123.690067526, 123.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                98.130102354, 98.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                90, 90,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                135, 135,
+                // X-axis-parallel line, below X-axis
+                135, 135,
+                // Y-axis-parallel line, right-hand from Y-axis
+                135, 135,
+                // Y-axis-parallel line, left-hand from Y-axis
+                135, 135,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                135.000057298, 135.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                146.309932474, 146.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                171.869897646, 171.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                180, 180,
+                #endregion
+            },
+            // On not passed through the origin first line vector, at 45 degrees to the axis X, second quarter
+            new double[]
+            {
+                #region [ On passed through the origin second line vector ]
+                // On X-axis line
+                135, 135,
+                // On Y-axis line
+                135, 135,
+                // Passed through the origin line, at between 0 and -1 degrees to the axis X
+                134.999942702, 134.999942702,
+                // Passed through the origin line, at -11 degrees to the axis X
+                123.690067526, 123.690067526,
+                // Passed through the origin line, at -37 degrees to the axis X
+                98.130102354, 98.130102354,
+                // Passed through the origin line, at -45 degrees to the axis X
+                90, 90,
+                #endregion
+                
+                #region [ On axis-parallel second line vector ]
+                // X-axis-parallel line, above X-axis
+                135, 135,
+                // X-axis-parallel line, below X-axis
+                135, 135,
+                // Y-axis-parallel line, right-hand from Y-axis
+                135, 135,
+                // Y-axis-parallel line, left-hand from Y-axis
+                135, 135,
+                #endregion
+                
+                #region [ On not passed through the origin second line vector, second quarter ]
+                // Not passed through the origin vector, at between 0 and 1 degrees to the axis X, second quarter
+                135.000057298, 135.000057298,
+                // Not passed through the origin vector, at 11 degrees to the axis X, second quarter
+                146.309932474, 146.309932474,
+                // Not passed through the origin vector, at 37 degrees to the axis X, second quarter
+                171.869897646, 171.869897646,
+                // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
+                180, 180,
+                #endregion
+            },
+        };
+
+        static InputTestData()
+        {
+            Vectors = new Vector[LineSegments.Length];
+            ReversedVectors = new Vector[LineSegments.Length];
+
+            for (int i = 0; i < LineSegments.Length; i++)
+            {
+                Vectors[i] = new Vector(LineSegments[i].X2 - LineSegments[i].X1, LineSegments[i].Y2 - LineSegments[i].Y1);
+                ReversedVectors[i] = new Vector(-Vectors[i].X, -Vectors[i].Y);
+            }
+        }
+
         public struct LineSegment
         {
             public double X1 { get; }
@@ -2531,12 +3711,12 @@
             }
         }
 
-        public struct SinglePoint
+        public struct Vector
         {
             public double X { get; }
             public double Y { get; }
 
-            public SinglePoint(double x, double y)
+            public Vector(double x, double y)
             {
                 X = x;
                 Y = y;
