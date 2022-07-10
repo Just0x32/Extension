@@ -54,6 +54,97 @@ namespace MathExtension.Tests
         }
         #endregion
 
+        #region [   ByLengthAndAngleVector  ]
+        private static IEnumerable<TestCaseData> ByLengthAndAngleVectorsSource()
+        {
+            CheckSameLengthArrays(VectorLengthsAndAngles, nameof(VectorLengthsAndAngles), Result_ByAngleVector, nameof(Result_ByAngleVector));
+
+            for (int i = 0; i < VectorLengthsAndAngles.Length; i++)
+                yield return new TestCaseData(VectorLengthsAndAngles[i], Result_ByAngleVector[i]);
+        }
+
+        [Test, TestCaseSource(nameof(ByLengthAndAngleVectorsSource))]
+        public void ByLengthAndAngleVectorCoordinates_Values_Values(LengthAndAngle lengthAndAngle, Vector? validValue)
+        {
+            double[]? result = ByLengthAndAngleVectorCoordinates(lengthAndAngle.Length, lengthAndAngle.Angle);
+            Assert.True(IsResultValid(), ErrorMessage());
+
+            bool IsResultValid()
+            {
+                return (result == null && validValue == null)
+                        || (result != null && validValue != null
+                            && Math.Abs(result[0] - ((Vector)validValue).X) < calculationThreshold
+                            && Math.Abs(result[1] - ((Vector)validValue).Y) < calculationThreshold);
+            }
+
+            string ErrorMessage()
+            {
+                if (result == null && validValue != null)
+                    return $"Null is not {((Vector)validValue).X}, {((Vector)validValue).Y}.";
+                else if (result != null && result.Length != 2)
+                    return "Result is not 2 numbers.";
+                else if (result != null && validValue == null)
+                    return $"{result[0]}, {result[1]} is not null.";
+                else if (result != null && validValue != null)
+                    return $"{result[0]}, {result[1]} is not {((Vector)validValue).X}, {((Vector)validValue).Y}.";
+                else
+                    return "Not an error.";
+            }
+        }
+
+        [Test, TestCaseSource(nameof(ByLengthAndAngleVectorsSource))]
+        public void ByLengthAndAngleVector_Values_Values(LengthAndAngle lengthAndAngle, Vector? validValue)
+        {
+            Vector2D? result = ByLengthAndAngleVector(lengthAndAngle.Length, lengthAndAngle.Angle);
+            Assert.True(IsResultValid(), ErrorMessage());
+
+            bool IsResultValid()
+            {
+                return (result == null && validValue == null)
+                        || (result != null && validValue != null
+                            && Math.Abs(((Vector2D)result).X - ((Vector)validValue).X) < calculationThreshold
+                            && Math.Abs(((Vector2D)result).Y - ((Vector)validValue).Y) < calculationThreshold);
+            }
+
+            string ErrorMessage()
+            {
+                if (result == null && validValue != null)
+                    return $"Null is not {((Vector)validValue).X}, {((Vector)validValue).Y}.";
+                else if (result != null && validValue == null)
+                    return $"{((Vector2D)result).X}, {((Vector2D)result).Y} is not null.";
+                else if (result != null && validValue != null)
+                    return $"{((Vector2D)result).X}, {((Vector2D)result).Y} is not {((Vector)validValue).X}, {((Vector)validValue).Y}.";
+                else
+                    return "Not an error.";
+            }
+        }
+        #endregion
+
+        #region [   VectorLength    ]
+        private static IEnumerable<TestCaseData> VectorLengthsSource()
+        {
+            CheckSameLengthArrays(Result_ByAngleVector, nameof(Result_ByAngleVector), VectorLengthsAndAngles, nameof(VectorLengthsAndAngles));
+
+            for (int i = 0; i < Result_ByAngleVector.Length; i++)
+                if (Result_ByAngleVector[i] != null)
+                    yield return new TestCaseData((Vector)Result_ByAngleVector[i], VectorLengthsAndAngles[i].Length);
+        }
+
+        [Test, TestCaseSource(nameof(VectorLengthsSource))]
+        public void VectorLength_Doubles_Values(Vector vector, double validValue)
+        {
+            double result = VectorLength(vector.X, vector.Y);
+            Assert.True(IsCalculatedResultValid(result, validValue, calculationThreshold), ResultIsNotValidValueErrorMessage(result, validValue));
+        }
+
+        [Test, TestCaseSource(nameof(VectorLengthsSource))]
+        public void VectorLength_Vectors_Values(Vector vector, double validValue)
+        {
+            double result = VectorLength(new Vector2D(vector.X, vector.Y));
+            Assert.True(IsCalculatedResultValid(result, validValue, calculationThreshold), ResultIsNotValidValueErrorMessage(result, validValue));
+        }
+        #endregion
+
         #region [   VectorAngle     ]
         private static IEnumerable<TestCaseData> VectorAnglesSource()
         {

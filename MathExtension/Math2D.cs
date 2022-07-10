@@ -49,6 +49,12 @@ namespace MathExtension
         public static double[] LineABCCoefficients(Vector2D firstPoint, Vector2D secondPoint)
             => LineABCCoefficients(firstPoint.X, firstPoint.Y, secondPoint.X, secondPoint.Y);
 
+        /// <summary>
+        /// Returns coefficients A and B of a line where the vector is on.
+        /// </summary>
+        /// <param name="x">Coordinate X of the vector.</param>
+        /// <param name="y">Coordinate Y of the vector.</param>
+        /// <returns>An array { A, B }.</returns>
         private static double[] VectorABCoefficients(double x, double y)
         {
             double a = y;
@@ -57,8 +63,56 @@ namespace MathExtension
             return new double[] { a, b };
         }
 
-        private static double[] VectorABCoefficients(Vector2D vector)
-            => VectorABCoefficients(vector.X, vector.Y);
+        /// <summary>
+        /// Returns vector coordinates by length and angle in degrees.
+        /// </summary>
+        /// <param name="length">Length of the vector.</param>
+        /// <param name="angle">Angle of a vector in degrees.</param>
+        /// <returns>An array { X, Y } <i>or</i><br/>Null — <i>if the vector does not exist.</i></returns>
+        public static double[]? ByLengthAndAngleVectorCoordinates(double length, double angle)
+        {
+            if (length < 0)
+                return null;
+            else
+            {
+                double x = length * Math.Cos(angle * Math.PI / 180);
+                double y = length * Math.Sin(angle * Math.PI / 180);
+                return new double[] { x, y };
+            }
+        }
+
+        /// <summary>
+        /// Returns a vector by length and angle in degrees.
+        /// </summary>
+        /// <param name="length">Length of the vector.</param>
+        /// <param name="angle">Angle of a vector in degrees.</param>
+        /// <returns>A vector <i>or</i><br/>Null — <i>if the vector does not exist.</i></returns>
+        public static Vector2D? ByLengthAndAngleVector(double length, double angle)
+        {
+            double[]? vectorCoordinates = ByLengthAndAngleVectorCoordinates(length, angle);
+
+            if (vectorCoordinates is null)
+                return null;
+            else
+                return new Vector2D(vectorCoordinates[0], vectorCoordinates[1]);
+        }
+
+        /// <summary>
+        /// Returns a length of a vector.
+        /// </summary>
+        /// <param name="x">Coordinate X of the vector.</param>
+        /// <param name="y">Coordinate Y of the vector.</param>
+        /// <returns>A positive number.</returns>
+        public static double VectorLength(double x, double y)
+            => Math.Sqrt(x * x + y * y);
+
+        /// <summary>
+        /// Returns a length of a vector.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <returns>A positive number.</returns>
+        public static double VectorLength(Vector2D vector)
+            => VectorLength(vector.X, vector.Y);
 
         /// <summary>
         /// Returns an angle of a vector in degrees relative to X axis.
@@ -90,7 +144,7 @@ namespace MathExtension
         /// <summary>
         /// Returns an angle of a vector in degrees relative to X axis.
         /// </summary>
-        /// <param name="vector">Vector.</param>
+        /// <param name="vector">The vector.</param>
         /// <returns>A number from 0 to 360.</returns>
         public static double VectorAngle(Vector2D vector)
             => VectorAngle(vector.X, vector.Y);

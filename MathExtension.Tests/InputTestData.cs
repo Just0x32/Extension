@@ -85,6 +85,34 @@
             new Vector(100, -3),
         };
 
+        public static LengthAndAngle[] VectorLengthsAndAngles { get; } =
+        {
+            new LengthAndAngle(-1, 0),
+            new LengthAndAngle(1, 0),
+            new LengthAndAngle(1, -1),
+            new LengthAndAngle(1, 45),
+            new LengthAndAngle(1, -30),
+            new LengthAndAngle(1, 90),
+            new LengthAndAngle(1, 175),
+            new LengthAndAngle(1, -175),
+            new LengthAndAngle(1, 180),
+            new LengthAndAngle(1, 360),
+        };
+
+        public static Vector?[] Result_ByAngleVector { get; } =
+        {
+            null,
+            new Vector(1, 0),
+            new Vector(0.9998476951564, -0.01745240643728),
+            new Vector(0.7071067811865, 0.7071067811865),
+            new Vector(0.8660254037844, -0.5),
+            new Vector(0, 1),
+            new Vector(-0.9961946980917, 0.08715574274766),
+            new Vector(-0.9961946980917, -0.08715574274766),
+            new Vector(-1, 0),
+            new Vector(1, 0),
+        };
+
         public static LineABCCoefficients[] Result_ABCCoefficients { get; } =
         {
             #region [ Passed through the origin lines ]
@@ -3720,6 +3748,18 @@
             {
                 X = x;
                 Y = y;
+            }
+        }
+
+        public struct LengthAndAngle
+        {
+            public double Length { get; }
+            public double Angle { get; }
+
+            public LengthAndAngle(double length, double angle)
+            {
+                Length = length;
+                Angle = angle;
             }
         }
     }
