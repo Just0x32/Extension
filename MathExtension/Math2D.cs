@@ -578,6 +578,59 @@ namespace MathExtension
                 X = x;
                 Y = y;
             }
+
+            public static Vector2D operator +(Vector2D firstVector, Vector2D secondVector) => Add(firstVector, secondVector);
+
+            public static Vector2D Add(Vector2D firstVector, Vector2D secondVector)
+                => new Vector2D(firstVector.X + secondVector.X, firstVector.Y + secondVector.Y);
+
+            public static Vector2D operator -(Vector2D firstVector, Vector2D secondVector) => Substruct(firstVector, secondVector);
+
+            public static Vector2D Substruct(Vector2D firstVector, Vector2D secondVector)
+                => new Vector2D(firstVector.X - secondVector.X, firstVector.Y - secondVector.Y);
+
+            public static Vector2D operator *(Vector2D vector, double number) => Multiply(vector, number);
+
+            public static Vector2D operator *(double number, Vector2D vector) => Multiply(vector, number);
+
+            public static Vector2D Multiply(Vector2D vector, double number) => new Vector2D(vector.X * number, vector.Y * number);
+
+            public static Vector2D Multiply(double number, Vector2D vector) => Multiply(vector, number);
+
+            public static Vector2D? operator /(Vector2D vector, double number) => Devide(vector, number);
+
+            public static Vector2D? Devide(Vector2D vector, double number)
+            {
+                if (number == 0)
+                    return null;
+
+                double x = vector.X / number;
+                double y = vector.Y / number;
+
+                if (double.IsNaN(x) || double.IsInfinity(x) || double.IsNaN(y) || double.IsInfinity(y))
+                    return null;
+                else
+                    return new Vector2D(vector.X / number, vector.Y / number);
+            }
+
+            public static bool operator ==(Vector2D firstVector, Vector2D secondVector) => Equals(firstVector, secondVector);
+
+            public static bool Equals(Vector2D firstVector, Vector2D secondVector) => firstVector.Equals(secondVector);
+
+            public static bool operator !=(Vector2D firstVector, Vector2D secondVector) => !Equals(firstVector, secondVector);
+
+            public override bool Equals(object? obj)
+            {
+                if (!(obj is Vector2D))
+                    return false;
+                else
+                {
+                    Vector2D vector = (Vector2D)obj;
+                    return X == vector.X && Y == vector.Y;
+                }
+            }
+
+            public override int GetHashCode() => X.GetHashCode() ^ Y.GetHashCode();
         }
     }
 }

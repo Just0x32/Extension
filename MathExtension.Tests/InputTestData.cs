@@ -99,6 +99,16 @@
             new LengthAndAngle(1, 360),
         };
 
+        public static double[] DoubleNumbers { get; } =
+        {
+            0, 1, -99.09, 0.1, -0.00000001
+        };
+
+        public static int[] IntegerNumbers { get; } =
+        {
+            0, 1, -1, 100000, -505
+        };
+
         public static Vector?[] Result_ByAngleVector { get; } =
         {
             null,
@@ -3694,6 +3704,502 @@
                 // Not passed through the origin vector, at 45 degrees to the axis X, second quarter
                 180, 180,
                 #endregion
+            },
+        };
+
+        public static Vector[][] Result_AdditionResultVectors { get; } =
+        {
+            // null
+            new Vector[]{},
+            // Vector(1, 0)
+            new Vector[]
+            {
+                new Vector(1.9998476951564, -0.01745240643728),
+                new Vector(1.7071067811865, 0.7071067811865),
+                new Vector(1.8660254037844, -0.5),
+                new Vector(1, 1),
+                new Vector(0.0038053019083, 0.08715574274766),
+                new Vector(0.0038053019083, -0.08715574274766),
+                new Vector(0, 0),
+                new Vector(2, 0),
+            },
+            // Vector(0.9998476951564, -0.01745240643728)
+            new Vector[]
+            {
+                new Vector(1.706954476343, 0.6896543747492),
+                new Vector(1.865873098941, -0.51745240643728),
+                new Vector(0.9998476951564, 0.9825475935627),
+                new Vector(0.0036529970647, 0.06970333631038),
+                new Vector(0.0036529970647, -0.1046081491849),
+                new Vector(-0.0001523048436, -0.01745240643728),
+                new Vector(1.9998476951564, -0.01745240643728),
+            },
+            // Vector(0.7071067811865, 0.7071067811865)
+            new Vector[]
+            {
+                new Vector(1.573132184971, 0.2071067811865),
+                new Vector(0.7071067811865, 1.7071067811865),
+                new Vector(-0.2890879169052, 0.7942625239342),
+                new Vector(-0.2890879169052, 0.6199510384388),
+                new Vector(-0.2928932188135, 0.7071067811865),
+                new Vector(1.7071067811865, 0.7071067811865),
+            },
+            // Vector(0.8660254037844, -0.5)
+            new Vector[]
+            {
+                new Vector(0.8660254037844, 0.5),
+                new Vector(-0.1301692943073, -0.4128442572523),
+                new Vector(-0.1301692943073, -0.58715574274766),
+                new Vector(-0.1339745962156, -0.5),
+                new Vector(1.8660254037844, -0.5),
+            },
+            // Vector(0, 1)
+            new Vector[]
+            {
+                new Vector(-0.9961946980917, 1.08715574274766),
+                new Vector(-0.9961946980917, 0.9128442572523),
+                new Vector(-1, 1),
+                new Vector(1, 1),
+            },
+            // Vector(-0.9961946980917, 0.08715574274766)
+            new Vector[]
+            {
+                new Vector(-1.992389396183, 0),
+                new Vector(-1.9961946980917, 0.08715574274766),
+                new Vector(0.0038053019083, 0.08715574274766),
+            },
+            // Vector(-0.9961946980917, -0.08715574274766)
+            new Vector[]
+            {
+                new Vector(-1.9961946980917, -0.08715574274766),
+                new Vector(0.0038053019083, -0.08715574274766),
+            },
+            // new Vector(-1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+            },
+        };
+
+        public static Vector[][] Result_SubtractionResultVectors { get; } =
+        {
+            // null
+            new Vector[]{},
+            // Vector(1, 0)
+            new Vector[]
+            {
+                new Vector(0.0001523048436, 0.01745240643728),
+                new Vector(0.2928932188135, -0.7071067811865),
+                new Vector(0.1339745962156, 0.5),
+                new Vector(1, -1),
+                new Vector(1.9961946980917, -0.08715574274766),
+                new Vector(1.9961946980917, 0.08715574274766),
+                new Vector(2, 0),
+                new Vector(0, 0),
+            },
+            // Vector(0.9998476951564, -0.01745240643728)
+            new Vector[]
+            {
+                new Vector(0.2927409139699, -0.7245591876238),
+                new Vector(0.133822291372, 0.4825475935627),
+                new Vector(0.9998476951564, -1.01745240643728),
+                new Vector(1.996042393248, -0.1046081491849),
+                new Vector(1.996042393248, 0.06970333631038),
+                new Vector(1.9998476951564, -0.01745240643728),
+                new Vector(-0.0001523048436, -0.01745240643728),
+            },
+            // Vector(0.7071067811865, 0.7071067811865)
+            new Vector[]
+            {
+                new Vector(-0.1589186225979, 1.207106781187),
+                new Vector(0.7071067811865, -0.2928932188135),
+                new Vector(1.703301479278, 0.6199510384388),
+                new Vector(1.703301479278, 0.7942625239342),
+                new Vector(1.7071067811865, 0.7071067811865),
+                new Vector(-0.2928932188135, 0.7071067811865),
+            },
+            // Vector(0.8660254037844, -0.5)
+            new Vector[]
+            {
+                new Vector(0.8660254037844, -1.5),
+                new Vector(1.862220101876, -0.5871557427477),
+                new Vector(1.862220101876, -0.4128442572523),
+                new Vector(1.866025403784, -0.5),
+                new Vector(-0.1339745962156, -0.5),
+            },
+            // Vector(0, 1)
+            new Vector[]
+            {
+                new Vector(0.9961946980917, 0.9128442572523),
+                new Vector(0.9961946980917, 1.08715574274766),
+                new Vector(1, 1),
+                new Vector(-1, 1),
+            },
+            // Vector(-0.9961946980917, 0.08715574274766)
+            new Vector[]
+            {
+                new Vector(0, 0.1743114854953),
+                new Vector(0.0038053019083, 0.08715574274766),
+                new Vector(-1.9961946980917, 0.08715574274766),
+            },
+            // Vector(-0.9961946980917, -0.08715574274766)
+            new Vector[]
+            {
+                new Vector(0.0038053019083, -0.08715574274766),
+                new Vector(-1.996194698092, -0.08715574274766),
+            },
+            // new Vector(-1, 0)
+            new Vector[]
+            {
+                new Vector(-2, 0),
+            },
+        };
+
+        public static Vector[][] Result_MultiplicationWithDoubleResultVectors { get; } =
+        {
+            // null
+            new Vector[]{},
+            // Vector(1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(1, 0),
+                new Vector(-99.09, 0),
+                new Vector(0.1, 0),
+                new Vector(-0.00000001, 0),
+            },
+            // Vector(0.9998476951564, -0.01745240643728)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0.9998476951564, -0.01745240643728),
+                new Vector(-99.07490811305, 1.72935895387),
+                new Vector(0.09998476951564, -0.001745240643728),
+                new Vector(-9.998476951564E-9, 1.745240643728E-10),
+            },
+            // Vector(0.7071067811865, 0.7071067811865)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0.7071067811865, 0.7071067811865),
+                new Vector(-70.06721094777, -70.06721094777),
+                new Vector(0.07071067811865, 0.07071067811865),
+                new Vector(-7.071067811865E-9, -7.071067811865E-9),
+            },
+            // Vector(0.8660254037844, -0.5)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0.8660254037844, -0.5),
+                new Vector(-85.814457261, 49.545),
+                new Vector(0.08660254037844, -0.05),
+                new Vector(-8.660254037844E-9, 5E-9),
+            },
+            // Vector(0, 1)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0, 1),
+                new Vector(0, -99.09),
+                new Vector(0, 0.1),
+                new Vector(0, -0.00000001),
+            },
+            // Vector(-0.9961946980917, 0.08715574274766)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(-0.9961946980917, 0.08715574274766),
+                new Vector(98.71293263391, -8.636262548866),
+                new Vector(-0.09961946980917, 0.008715574274766),
+                new Vector(9.961946980917E-9, -8.715574274766E-10),
+            },
+            // Vector(-0.9961946980917, -0.08715574274766)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(-0.9961946980917, -0.08715574274766),
+                new Vector(98.71293263391, 8.636262548866),
+                new Vector(-0.09961946980917, -0.008715574274766),
+                new Vector(9.961946980917E-9, 8.715574274766E-10),
+            },
+            // Vector(-1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(-1, 0),
+                new Vector(99.09, 0),
+                new Vector(-0.1, 0),
+                new Vector(0.00000001, 0),
+            },
+            // Vector(1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(1, 0),
+                new Vector(-99.09, 0),
+                new Vector(0.1, 0),
+                new Vector(-0.00000001, 0),
+            },
+        };
+
+        public static Vector[][] Result_MultiplicationWithIntegerResultVectors { get; } =
+        {
+            // null
+            new Vector[]{},
+            // Vector(1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(1, 0),
+                new Vector(-1, 0),
+                new Vector(100000, 0),
+                new Vector(-505, 0),
+            },
+            // Vector(0.9998476951564, -0.01745240643728)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0.9998476951564, -0.01745240643728),
+                new Vector(-0.9998476951564, 0.01745240643728),
+                new Vector(99984.76951564, -1745.240643728),
+                new Vector(-504.923086054, 8.813465250826),
+            },
+            // Vector(0.7071067811865, 0.7071067811865)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0.7071067811865, 0.7071067811865),
+                new Vector(-0.7071067811865, -0.7071067811865),
+                new Vector(70710.67811865, 70710.67811865),
+                new Vector(-357.0889244992, -357.0889244992),
+            },
+            // Vector(0.8660254037844, -0.5)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0.8660254037844, -0.5),
+                new Vector(-0.8660254037844, 0.5),
+                new Vector(86602.54037844, -50000),
+                new Vector(-437.3428289111, 252.5),
+            },
+            // Vector(0, 1)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(0, 1),
+                new Vector(0, -1),
+                new Vector(0, 100000),
+                new Vector(0, -505),
+            },
+            // Vector(-0.9961946980917, 0.08715574274766)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(-0.9961946980917, 0.08715574274766),
+                new Vector(0.9961946980917, -0.08715574274766),
+                new Vector(-99619.46980917, 8715.574274766),
+                new Vector(503.0783225363, -44.01365008757),
+            },
+            // Vector(-0.9961946980917, -0.08715574274766)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(-0.9961946980917, -0.08715574274766),
+                new Vector(0.9961946980917, 0.08715574274766),
+                new Vector(-99619.46980917, -8715.574274766),
+                new Vector(503.0783225363, 44.01365008757),
+            },
+            // Vector(-1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(-1, 0),
+                new Vector(1, 0),
+                new Vector(-100000, 0),
+                new Vector(505, 0),
+            },
+            // Vector(1, 0)
+            new Vector[]
+            {
+                new Vector(0, 0),
+                new Vector(1, 0),
+                new Vector(-1, 0),
+                new Vector(100000, 0),
+                new Vector(-505, 0),
+            },
+        };
+
+        public static Vector?[][] Result_DivisionWithDoubleResultVectors { get; } =
+        {
+            // null
+            new Vector?[]{},
+            // Vector(1, 0)
+            new Vector?[]
+            {
+                null,
+                new Vector(1, 0),
+                new Vector(-0.01009183570491, 0),
+                new Vector(10, 0),
+                new Vector(-100000000, 0),
+            },
+            // Vector(0.9998476951564, -0.01745240643728)
+            new Vector?[]
+            {
+                null,
+                new Vector(0.9998476951564, -0.01745240643728),
+                new Vector(-0.01009029866946, 0.0001761268184204),
+                new Vector(9.998476951564, -0.1745240643728),
+                new Vector(-99984769.51564, 1745240.643728),
+            },
+            // Vector(0.7071067811865, 0.7071067811865)
+            new Vector?[]
+            {
+                null,
+                new Vector(0.7071067811865, 0.7071067811865),
+                new Vector(-0.007136005461565, -0.007136005461565),
+                new Vector(7.071067811865, 7.071067811865),
+                new Vector(-70710678.11865, -70710678.11865),
+            },
+            // Vector(0.8660254037844, -0.5)
+            new Vector?[]
+            {
+                null,
+                new Vector(0.8660254037844, -0.5),
+                new Vector(-0.008739786091275, 0.005045917852457),
+                new Vector(8.660254037844, -5),
+                new Vector(-86602540.37844, 50000000),
+            },
+            // Vector(0, 1)
+            new Vector?[]
+            {
+                null,
+                new Vector(0, 1),
+                new Vector(0, -0.01009183570491),
+                new Vector(0, 10),
+                new Vector(0, -100000000),
+            },
+            // Vector(-0.9961946980917, 0.08715574274766)
+            new Vector?[]
+            {
+                null,
+                new Vector(-0.9961946980917, 0.08715574274766),
+                new Vector(0.01005343322325, -0.0008795614365492),
+                new Vector(-9.961946980917, 0.8715574274766),
+                new Vector(99619469.80917, -8715574.274766),
+            },
+            // Vector(-0.9961946980917, -0.08715574274766)
+            new Vector?[]
+            {
+                null,
+                new Vector(-0.9961946980917, -0.08715574274766),
+                new Vector(0.01005343322325, 0.0008795614365492),
+                new Vector(-9.961946980917, -0.8715574274766),
+                new Vector(99619469.80917, 8715574.274766),
+            },
+            // Vector(-1, 0)
+            new Vector?[]
+            {
+                null,
+                new Vector(-1, 0),
+                new Vector(0.01009183570491, 0),
+                new Vector(-10, 0),
+                new Vector(100000000, 0),
+            },
+            // Vector(1, 0)
+            new Vector?[]
+            {
+                null,
+                new Vector(1, 0),
+                new Vector(-0.01009183570491, 0),
+                new Vector(10, 0),
+                new Vector(-100000000, 0),
+            },
+        };
+
+        public static Vector?[][] Result_DivisionWithIntegerResultVectors { get; } =
+        {
+            // null
+            new Vector?[]{},
+            // Vector(1, 0)
+            new Vector?[]
+            {
+                null,
+                new Vector(1, 0),
+                new Vector(-1, 0),
+                new Vector(1E-5, 0),
+                new Vector(-0.001980198019802, 0),
+            },
+            // Vector(0.9998476951564, -0.01745240643728)
+            new Vector?[]
+            {
+                null,
+                new Vector(0.9998476951564, -0.01745240643728),
+                new Vector(-0.9998476951564, 0.01745240643728),
+                new Vector(9.998476951564E-6, -1.745240643728E-7),
+                new Vector(-0.001979896426052, 3.455922066788E-5),
+            },
+            // Vector(0.7071067811865, 0.7071067811865)
+            new Vector?[]
+            {
+                null,
+                new Vector(0.7071067811865, 0.7071067811865),
+                new Vector(-0.7071067811865, -0.7071067811865),
+                new Vector(7.071067811865E-6, 7.071067811865E-6),
+                new Vector(-0.001400211447894, -0.001400211447894),
+            },
+            // Vector(0.8660254037844, -0.5)
+            new Vector?[]
+            {
+                null,
+                new Vector(0.8660254037844, -0.5),
+                new Vector(-0.8660254037844, 0.5),
+                new Vector(8.660254037844E-6, -5E-6),
+                new Vector(-0.001714901789672, 0.000990099009901),
+            },
+            // Vector(0, 1)
+            new Vector?[]
+            {
+                null,
+                new Vector(0, 1),
+                new Vector(0, -1),
+                new Vector(0, 1E-5),
+                new Vector(0, -0.001980198019802),
+            },
+            // Vector(-0.9961946980917, 0.08715574274766)
+            new Vector?[]
+            {
+                null,
+                new Vector(-0.9961946980917, 0.08715574274766),
+                new Vector(0.9961946980917, -0.08715574274766),
+                new Vector(-9.961946980917E-6, 8.715574274766E-7),
+                new Vector(0.001972662768498, -0.0001725856292033),
+            },
+            // Vector(-0.9961946980917, -0.08715574274766)
+            new Vector?[]
+            {
+                null,
+                new Vector(-0.9961946980917, -0.08715574274766),
+                new Vector(0.9961946980917, 0.08715574274766),
+                new Vector(-9.961946980917E-6, -8.715574274766E-7),
+                new Vector(0.001972662768498, 0.0001725856292033),
+            },
+            // Vector(-1, 0)
+            new Vector?[]
+            {
+                null,
+                new Vector(-1, 0),
+                new Vector(1, 0),
+                new Vector(-1E-5, 0),
+                new Vector(0.001980198019802, 0),
+            },
+            // Vector(1, 0)
+            new Vector?[]
+            {
+                null,
+                new Vector(1, 0),
+                new Vector(-1, 0),
+                new Vector(1E-5, 0),
+                new Vector(-0.001980198019802, 0),
             },
         };
 
