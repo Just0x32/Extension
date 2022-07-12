@@ -159,12 +159,12 @@ namespace MathExtension
         /// <param name="lineX2">Coordinate X of the line second point.</param>
         /// <param name="lineY2">Coordinate Y of the line second point.</param>
         /// <returns>0 — <i>if the point is on the line,</i><br/>
-        /// 1 — <i>if the point is on an upper half-plane from the line,</i><br/>
-        /// -1 — <i>if the point is on an lower half-plane from the line.</i><br/></returns>
+        /// -1 — <i>if the point is on an upper half-plane from the line,</i><br/>
+        /// 1 — <i>if the point is on an lower half-plane from the line.</i><br/></returns>
         public static int RelativeToLinePointLocation(double pointX, double pointY, double lineX1, double lineY1, double lineX2, double lineY2)
         {
             ConvertOneLineABCCoefficients(LineABCCoefficients(lineX1, lineY1, lineX2, lineY2), out double a, out double b, out double c);
-            return -Math.Sign(a * pointX + b * pointY + c);
+            return Math.Sign(a * pointX + b * pointY + c);
         }
 
         /// <summary>
@@ -174,8 +174,8 @@ namespace MathExtension
         /// <param name="lineFirstPoint">First point of the line.</param>
         /// <param name="lineSecondPoint">Second point of the line.</param>
         /// <returns>0 — <i>if the point is on the line,</i><br/>
-        /// 1 — <i>if the point is on an upper half-plane from the line,</i><br/>
-        /// -1 — <i>if the point is on an lower half-plane from the line.</i><br/></returns>
+        /// -1 — <i>if the point is on an upper half-plane from the line,</i><br/>
+        /// 1 — <i>if the point is on an lower half-plane from the line.</i><br/></returns>
         public static int RelativeToLinePointLocation(Vector2D singlePoint, Vector2D lineFirstPoint, Vector2D lineSecondPoint)
             => RelativeToLinePointLocation(singlePoint.X, singlePoint.Y, lineFirstPoint.X, lineFirstPoint.Y, lineSecondPoint.X, lineSecondPoint.Y);
 

@@ -290,24 +290,24 @@
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
+                1, 1,
                 // X-axis-parallel line, below X-axis
-                1, 1,
-                // Y-axis-parallel line, right-hand from Y-axis
-                1, 1,
-                // Y-axis-parallel line, left-hand from Y-axis
                 -1, -1,
+                // Y-axis-parallel line, right-hand from Y-axis
+                -1, -1,
+                // Y-axis-parallel line, left-hand from Y-axis
+                1, 1,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
             // Point (1, 0)
@@ -317,37 +317,37 @@
                 // On X-axis line
                 0, 0,
                 // On Y-axis line
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -11 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -37 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -45 degrees to the axis X
                 -1, -1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                1, 1,
                 #endregion
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
-                // X-axis-parallel line, below X-axis
                 1, 1,
+                // X-axis-parallel line, below X-axis
+                -1, -1,
                 // Y-axis-parallel line, right-hand from Y-axis
                 0, 0,
                 // Y-axis-parallel line, left-hand from Y-axis
-                -1, -1,
+                1, 1,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
             // Point (-1, 1)
@@ -355,15 +355,15 @@
             {
                 #region [ Passed through the origin lines ]
                 // On X-axis line
-                1, 1,
+                -1, -1,
                 // On Y-axis line
-                1, 1,
+                -1, -1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                1, 1,
+                -1, -1,
                 // Passed through the origin line, at -11 degrees to the axis X
-                1, 1,
+                -1, -1,
                 // Passed through the origin line, at -37 degrees to the axis X
-                1, 1,
+                -1, -1,
                 // Passed through the origin line, at -45 degrees to the axis X
                 0, 0,
                 #endregion
@@ -372,9 +372,9 @@
                 // X-axis-parallel line, above X-axis
                 0, 0,
                 // X-axis-parallel line, below X-axis
-                1, 1,
+                -1, -1,
                 // Y-axis-parallel line, right-hand from Y-axis
-                1, 1,
+                -1, -1,
                 // Y-axis-parallel line, left-hand from Y-axis
                 0, 0,
                 #endregion
@@ -395,39 +395,39 @@
             {
                 #region [ Passed through the origin lines ]
                 // On X-axis line
-                -1, -1,
+                1, 1,
                 // On Y-axis line
-                1, 1,
+                -1, -1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                -1, -1,
-                // Passed through the origin line, at -11 degrees to the axis X
-                -1, -1,
-                // Passed through the origin line, at -37 degrees to the axis X
-                -1, -1,
-                // Passed through the origin line, at -45 degrees to the axis X
                 1, 1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                1, 1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                -1, -1,
                 #endregion
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
+                1, 1,
                 // X-axis-parallel line, below X-axis
                 0, 0,
                 // Y-axis-parallel line, right-hand from Y-axis
-                1, 1,
+                -1, -1,
                 // Y-axis-parallel line, left-hand from Y-axis
                 0, 0,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
             // Point (100, 0)
@@ -437,37 +437,37 @@
                 // On X-axis line
                 0, 0,
                 // On Y-axis line
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -11 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -37 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -45 degrees to the axis X
                 -1, -1,
+                // Passed through the origin line, at -11 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                1, 1,
                 #endregion
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
-                // X-axis-parallel line, below X-axis
                 1, 1,
+                // X-axis-parallel line, below X-axis
+                -1, -1,
                 // Y-axis-parallel line, right-hand from Y-axis
-                -1, -1,
+                1, 1,
                 // Y-axis-parallel line, left-hand from Y-axis
-                -1, -1,
+                1, 1,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
             // Point (100, -1)
@@ -475,39 +475,39 @@
             {
                 #region [ Passed through the origin lines ]
                 // On X-axis line
-                -1, -1,
+                1, 1,
                 // On Y-axis line
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at -11 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -37 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -45 degrees to the axis X
                 -1, -1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                1, 1,
                 #endregion
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
+                1, 1,
                 // X-axis-parallel line, below X-axis
                 0, 0,
                 // Y-axis-parallel line, right-hand from Y-axis
-                -1, -1,
+                1, 1,
                 // Y-axis-parallel line, left-hand from Y-axis
-                -1, -1,
+                1, 1,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
             // Point (100, -2)
@@ -515,39 +515,39 @@
             {
                 #region [ Passed through the origin lines ]
                 // On X-axis line
-                -1, -1,
+                1, 1,
                 // On Y-axis line
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at -11 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -37 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -45 degrees to the axis X
                 -1, -1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                1, 1,
                 #endregion
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
+                1, 1,
                 // X-axis-parallel line, below X-axis
-                -1, -1,
+                1, 1,
                 // Y-axis-parallel line, right-hand from Y-axis
-                -1, -1,
+                1, 1,
                 // Y-axis-parallel line, left-hand from Y-axis
-                -1, -1,
+                1, 1,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
             // Point (100, -3)
@@ -555,39 +555,39 @@
             {
                 #region [ Passed through the origin lines ]
                 // On X-axis line
-                -1, -1,
+                1, 1,
                 // On Y-axis line
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at between 0 and -1 degrees to the axis X
-                -1, -1,
+                1, 1,
                 // Passed through the origin line, at -11 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -37 degrees to the axis X
-                1, 1,
-                // Passed through the origin line, at -45 degrees to the axis X
                 -1, -1,
+                // Passed through the origin line, at -37 degrees to the axis X
+                -1, -1,
+                // Passed through the origin line, at -45 degrees to the axis X
+                1, 1,
                 #endregion
                 
                 #region [ Axis-parallel lines ]
                 // X-axis-parallel line, above X-axis
-                -1, -1,
+                1, 1,
                 // X-axis-parallel line, below X-axis
-                -1, -1,
+                1, 1,
                 // Y-axis-parallel line, right-hand from Y-axis
-                -1, -1,
+                1, 1,
                 // Y-axis-parallel line, left-hand from Y-axis
-                -1, -1,
+                1, 1,
                 #endregion
                 
                 #region [ Not passed through the origin lines, second quarter ]
                 // Not passed through the origin line, at between 0 and 1 degrees to the axis X, second
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 11 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 37 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 // Not passed through the origin line, at 45 degrees to the axis X, second quarter
-                -1, -1,
+                1, 1,
                 #endregion
             },
         };
