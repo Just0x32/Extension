@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IOExtension
 {
@@ -22,11 +19,11 @@ namespace IOExtension
         #endregion
 
         #region [ Properties ]
-        public static bool IsFolderCreatingError { get; private set; } = false;
-        public static bool IsFileCreatingError { get; private set; } = false;
-        public static bool IsFileWritingError { get; private set; } = false;
-        public static bool IsFileReadingError { get; private set; } = false;
-        public static bool IsError { get => IsFolderCreatingError || IsFileCreatingError || IsFileWritingError || IsFileReadingError; }
+        public static bool IsFolderCreatingError    { get; private set; } = false;
+        public static bool IsFileCreatingError      { get; private set; } = false;
+        public static bool IsFileWritingError       { get; private set; } = false;
+        public static bool IsFileReadingError       { get; private set; } = false;
+        public static bool IsError                  { get => IsFolderCreatingError || IsFileCreatingError || IsFileWritingError || IsFileReadingError; }
 
         public static string SettingsFilePath
         {
@@ -38,7 +35,6 @@ namespace IOExtension
                 if (IsPathValid(value))
                 {
                     int indexOfFileName = value.LastIndexOf('\\') + 1;
-
                     directoryPath = value[..indexOfFileName];
                     fileName = value[indexOfFileName..];
                 }
@@ -58,16 +54,7 @@ namespace IOExtension
 
         #region [ User Methods ]
         public static bool IsSettingsFileAvailable(bool createIfAbsent = false)
-        {
-            if (IsDirectoryAvailable(directoryPath, createIfAbsent) && IsFileAvailable(SettingsFilePath, createIfAbsent))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+            => IsDirectoryAvailable(directoryPath, createIfAbsent) && IsFileAvailable(SettingsFilePath, createIfAbsent);
 
         public static bool TryDeleteSettingsFile()
         {
@@ -93,15 +80,7 @@ namespace IOExtension
         public static string GetPropertyValue(string property)
         {
             while (isLocked) ;
-
-            if (!IsError && IsFileAvailable(SettingsFilePath))
-            {
-                return ReadValue(property);
-            }
-            else
-            {
-                return null;
-            }
+            return !IsError && IsFileAvailable(SettingsFilePath) ? ReadValue(property) : null;
         }
 
         public static void ResetErrors()
@@ -120,15 +99,7 @@ namespace IOExtension
             int indexOfFileName = value.LastIndexOf('\\') + 1;
             string directoryPath = value[..indexOfFileName];
             string fileName = value[indexOfFileName..];
-
-            if (!IsDirectoryPathValid(directoryPath) || !IsColonIndexInDirectoryPathValid(directoryPath) || !IsFileNameValid(fileName))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return !(!IsDirectoryPathValid(directoryPath) || !IsColonIndexInDirectoryPathValid(directoryPath) || !IsFileNameValid(fileName));
 
             bool IsDirectoryPathValid(string value)
             {
@@ -136,10 +107,8 @@ namespace IOExtension
                     return false;
 
                 foreach (var forbiddenSymbol in directoryPathForbiddenSymbols)
-                {
                     if (value.Contains(forbiddenSymbol))
                         return false;
-                }
 
                 return true;
             }
@@ -151,10 +120,8 @@ namespace IOExtension
                 int firstIndexOfBackslash = value.IndexOf('\\');
 
                 if (firstIndexOfColon > -1)
-                {
                     if (firstIndexOfColon != 1 || firstIndexOfBackslash != 2 || firstIndexOfColon != lastIndexOfColon)
                         return false;
-                }
 
                 return true;
             }
@@ -162,32 +129,23 @@ namespace IOExtension
             bool IsFileNameValid(string value)
             {
                 foreach (var forbiddenSymbol in fileNameForbiddenSymbols)
-                {
                     if (value.Contains(forbiddenSymbol))
                         return false;
-                }
 
                 int lastIndexOfDot = value.LastIndexOf('.');
-                if (lastIndexOfDot < 1 || lastIndexOfDot > value.Length - 2)
-                    return false;
 
-                return true;
+                return !(lastIndexOfDot < 1 || lastIndexOfDot > value.Length - 2);
             }
         }
 
-        private static bool IsDirectoryAvailable(string path, bool createIfAbsent = false)
+        private static bool IsDirectoryAvailable(string path, bool isCreateIfAbsent = false)
         {
             if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
-                if (createIfAbsent)
-                {
-                    if (!TryCreateDirectory(path))
-                        return false;
-                }
-                else
-                {
+                if (!isCreateIfAbsent)
                     return false;
-                }
+                else if (!TryCreateDirectory(path))
+                    return false;
             }
 
             return true;
@@ -208,19 +166,14 @@ namespace IOExtension
             }
         }
 
-        private static bool IsFileAvailable(string path, bool createIfAbsent = false)
+        private static bool IsFileAvailable(string path, bool isCreateIfAbsent = false)
         {
             if (!File.Exists(path))
             {
-                if (createIfAbsent)
-                {
-                    if (!TryCreateFile(path))
-                        return false;
-                }
-                else
-                {
+                if (!isCreateIfAbsent)
                     return false;
-                }
+                else if (!TryCreateFile(path))
+                    return false;
             }
 
             return true;
@@ -250,10 +203,8 @@ namespace IOExtension
         private static void WriteValue(string property, string value)
         {
             isLocked = true;
-
             string path = SettingsFilePath;
             string tempPath = path + ".tmp";
-
             StreamReader streamReader = null;
             StreamWriter streamWriter = null;
 
@@ -275,9 +226,7 @@ namespace IOExtension
                         isValueWritten = true;
                     }
                     else
-                    {
                         streamWriter.WriteLine(oldLine);
-                    }
                 }
 
                 if (!isValueWritten)
@@ -295,18 +244,15 @@ namespace IOExtension
 
             File.Delete(path);
             File.Move(tempPath, path);
-
             isLocked = false;
         }
 
         private static string ReadValue(string property)
         {
             isLocked = true;
-
             string path = SettingsFilePath;
             string requiredLineStart = property + PropertyValueSeparator;
             string value = null;
-
             StreamReader streamReader = null;
 
             try

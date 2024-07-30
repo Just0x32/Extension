@@ -50,13 +50,14 @@ namespace IOExtension.Tests
             int count = 0;
 
             for (int i = 0; i < validDirectoryPaths.Length; i++)
-            {
-                for (int j = 0; j < validFileNames.Length; j++)
-                {
-                    count++;
-                    validSettingsFilePaths[count] = validDirectoryPaths[i] + validFileNames[j];
-                }
-            }
+                if (Path.IsPathRooted(validDirectoryPaths[i]) && Directory.Exists(validDirectoryPaths[i]))
+                    for (int j = 0; j < validFileNames.Length; j++)
+                    {
+                        count++;
+                        validSettingsFilePaths[count] = validDirectoryPaths[i] + validFileNames[j];
+                    }
+
+            validSettingsFilePaths = validSettingsFilePaths[..count];
         }
 
         private static void CreateInvalidSettingsFilePaths()
@@ -76,49 +77,37 @@ namespace IOExtension.Tests
             void CreateInvalidDirectoryPaths()
             {
                 for (int i = 0; i < invalidDirectoryPaths.Length; i++)
-                {
                     for (int j = 0; j < validFileNames.Length; j++)
                     {
                         count++;
                         invalidSettingsFilePaths[count] = invalidDirectoryPaths[i] + validFileNames[j];
                     }
-                }
 
                 for (int i = 0; i < validDirectoryPaths.Length; i++)
-                {
                     for (int j = 0; j < directoryPathForbiddenSymbols.Length; j++)
-                    {
                         for (int k = 0; k < validFileNames.Length; k++)
                         {
                             count++;
                             invalidSettingsFilePaths[count] = InvalidValue(validDirectoryPaths[i], directoryPathForbiddenSymbols[j]) + validFileNames[k];
                         }
-                    }
-                }
             }
 
             void CreateInvalidFileNames()
             {
                 for (int i = 0; i < validDirectoryPaths.Length; i++)
-                {
                     for (int j = 0; j < invalidFileNames.Length; j++)
                     {
                         count++;
                         invalidSettingsFilePaths[count] = validDirectoryPaths[i] + invalidFileNames[j];
                     }
-                }
 
                 for (int i = 0; i < validDirectoryPaths.Length; i++)
-                {
                     for (int j = 0; j < validFileNames.Length; j++)
-                    {
                         for (int k = 0; k < fileNameForbiddenSymbols.Length; k++)
                         {
                             count++;
                             invalidSettingsFilePaths[count] = validDirectoryPaths[i] + InvalidValue(validFileNames[j], fileNameForbiddenSymbols[k]);
                         }
-                    }
-                }
 
                 for (int i = 0; i < fileNameForbiddenSymbols.Length; i++)
                 {
