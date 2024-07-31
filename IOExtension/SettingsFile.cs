@@ -4,6 +4,9 @@ using System.Text;
 
 namespace IOExtension
 {
+    /// <summary>
+    /// Provides static methods for the creation and editing of a settings file.
+    /// </summary>
     public static class SettingsFile
     {
         #region [ Fields ]
@@ -19,12 +22,45 @@ namespace IOExtension
         #endregion
 
         #region [ Properties ]
+        /// <summary>
+        /// Gets a value that indicates a folder creating error.
+        /// </summary>
+        /// <returns><see langword="true"/> if the error exists; otherwise, <see langword="false"/></returns>
         public static bool IsFolderCreatingError    { get; private set; } = false;
+
+        /// <summary>
+        /// Gets a value that indicates a file creating error.
+        /// </summary>
+        /// <returns><see langword="true"/> if the error exists; otherwise, <see langword="false"/></returns>
         public static bool IsFileCreatingError      { get; private set; } = false;
+
+        /// <summary>
+        /// Gets a value that indicates a file writing error.
+        /// </summary>
+        /// <returns><see langword="true"/> if the error exists; otherwise, <see langword="false"/></returns>
         public static bool IsFileWritingError       { get; private set; } = false;
+
+        /// <summary>
+        /// Gets a value that indicates a file reading error.
+        /// </summary>
+        /// <returns><see langword="true"/> if the error exists; otherwise, <see langword="false"/></returns>
         public static bool IsFileReadingError       { get; private set; } = false;
+
+        /// <summary>
+        /// Gets a value that indicates any error.
+        /// </summary>
+        /// <returns><see langword="true"/> if the error exists; otherwise, <see langword="false"/></returns>
         public static bool IsError                  { get => IsFolderCreatingError || IsFileCreatingError || IsFileWritingError || IsFileReadingError; }
 
+        /// <summary>
+        /// Gets a value that indicates settings file locked status.
+        /// </summary>
+        /// <returns><see langword="true"/> if the file locked; otherwise, <see langword="false"/></returns>
+        public static bool IsLocked                 { get => isLocked; }
+
+        /// <summary>
+        /// Gets or sets a path of the settings file.
+        /// </summary>
         public static string SettingsFilePath
         {
             get => directoryPath + fileName;
@@ -41,6 +77,9 @@ namespace IOExtension
             }
         }
 
+        /// <summary>
+        /// Gets or sets a separator style between a property name and value in the settings file.
+        /// </summary>
         public static string PropertyValueSeparator
         {
             get => propertyValueSeparator;
@@ -52,10 +91,20 @@ namespace IOExtension
         }
         #endregion
 
-        #region [ User Methods ]
-        public static bool IsSettingsFileAvailable(bool createIfAbsent = false)
-            => IsDirectoryAvailable(directoryPath, createIfAbsent) && IsFileAvailable(SettingsFilePath, createIfAbsent);
+        #region [ Public Methods ]
+        /// <summary>
+        /// Checks if the settings file available. Possible to create the file if it is absent.
+        /// A return value indicates whether the file exists.
+        /// </summary>
+        /// <param name="isCreateIfAbsent">Create the file if it is absent.</param>
+        /// <returns><see langword="true"/> if the file exists; otherwise, <see langword="false"/></returns>
+        public static bool IsSettingsFileAvailable(bool isCreateIfAbsent = false)
+            => IsDirectoryAvailable(directoryPath, isCreateIfAbsent) && IsFileAvailable(SettingsFilePath, isCreateIfAbsent);
 
+        /// <summary>
+        /// Deletes the settings file. A return value indicates whether the file not exists.
+        /// </summary>
+        /// <returns><see langword="true"/> if the file not exists; otherwise, <see langword="false"/></returns>
         public static bool TryDeleteSettingsFile()
         {
             if (File.Exists(SettingsFilePath))
@@ -69,20 +118,37 @@ namespace IOExtension
             return true;
         }
 
-        public static void SetPropertyValue(string property, string value)
+        /// <summary>
+        /// Sets the property by name.
+        /// </summary>
+        /// <param name="name">The property name.</param>
+        /// <param name="value">The property value.</param>
+        public static void SetPropertyValue(string name, string value)
         {
             while (isLocked) ;
 
-            if (!IsError && IsDirectoryAvailable(directoryPath) && IsFileAvailable(SettingsFilePath))
-                WriteValue(property, value);
+            if (!string.IsNullOrEmpty(name) &&
+                !string.IsNullOrWhiteSpace(name) &&
+                !IsError &&
+                IsDirectoryAvailable(directoryPath) &&
+                IsFileAvailable(SettingsFilePath))
+                    WriteValue(name, value);
         }
 
-        public static string GetPropertyValue(string property)
+        /// <summary>
+        /// Gets the property by name.
+        /// </summary>
+        /// <param name="name">The property name.</param>
+        /// <returns>The property value from the settings, or <see langword="null"/> if no property found.</returns>
+        public static string? GetPropertyValue(string name)
         {
             while (isLocked) ;
-            return !IsError && IsFileAvailable(SettingsFilePath) ? ReadValue(property) : null;
+            return !IsError && IsFileAvailable(SettingsFilePath) ? ReadValue(name) : null;
         }
 
+        /// <summary>
+        /// Resets all errors.
+        /// </summary>
         public static void ResetErrors()
         {
             IsFolderCreatingError = false;
@@ -91,16 +157,20 @@ namespace IOExtension
             IsFileReadingError = false;
         }
 
+        /// <summary>
+        /// Forced unlocks the settings file.
+        /// </summary>
         public static void Unlock() => isLocked = false;
         #endregion
 
+        #region [ Private Methods ]
         private static bool IsPathValid(string value)
         {
             int indexOfFileName = value.LastIndexOf('\\') + 1;
             string directoryPath = value[..indexOfFileName];
             string fileName = value[indexOfFileName..];
             return !(!IsDirectoryPathValid(directoryPath) || !IsColonIndexInDirectoryPathValid(directoryPath) || !IsFileNameValid(fileName));
-
+            
             bool IsDirectoryPathValid(string value)
             {
                 if (value.Contains(@"\\"))
@@ -140,7 +210,7 @@ namespace IOExtension
 
         private static bool IsDirectoryAvailable(string path, bool isCreateIfAbsent = false)
         {
-            if (!String.IsNullOrEmpty(path) && !Directory.Exists(path))
+            if (!string.IsNullOrEmpty(path) && !Directory.Exists(path))
             {
                 if (!isCreateIfAbsent)
                     return false;
@@ -180,7 +250,7 @@ namespace IOExtension
 
             bool TryCreateFile(string path)
             {
-                FileStream fileStream = null;
+                FileStream? fileStream = null;
 
                 try
                 {
@@ -193,7 +263,7 @@ namespace IOExtension
                 }
                 finally
                 {
-                    fileStream.Dispose();
+                    fileStream?.Dispose();
                 }
 
                 return true;
@@ -205,20 +275,23 @@ namespace IOExtension
             isLocked = true;
             string path = SettingsFilePath;
             string tempPath = path + ".tmp";
-            StreamReader streamReader = null;
-            StreamWriter streamWriter = null;
+            StreamReader? streamReader = null;
+            StreamWriter? streamWriter = null;
 
             try
             {
                 streamReader = new StreamReader(path);
                 streamWriter = new StreamWriter(tempPath);
-                string oldLine;
+                string? oldLine;
                 string newLine = property + PropertyValueSeparator + value;
                 bool isValueWritten = false;
 
                 while (!streamReader.EndOfStream)
                 {
                     oldLine = streamReader.ReadLine();
+
+                    if (oldLine is null)
+                        break;
 
                     if (oldLine.StartsWith(property))
                     {
@@ -240,29 +313,31 @@ namespace IOExtension
             {
                 streamReader?.Dispose();
                 streamWriter?.Dispose();
+                File.Delete(path);
+                File.Move(tempPath, path);
+                isLocked = false;
             }
-
-            File.Delete(path);
-            File.Move(tempPath, path);
-            isLocked = false;
         }
 
-        private static string ReadValue(string property)
+        private static string? ReadValue(string propertyName)
         {
             isLocked = true;
             string path = SettingsFilePath;
-            string requiredLineStart = property + PropertyValueSeparator;
-            string value = null;
-            StreamReader streamReader = null;
+            string requiredLineStart = propertyName + PropertyValueSeparator;
+            string? value = null;
+            StreamReader? streamReader = null;
 
             try
             {
                 streamReader = new StreamReader(path);
-                string line;
+                string? line;
 
                 while (!streamReader.EndOfStream)
                 {
                     line = streamReader.ReadLine();
+
+                    if (line is null)
+                        break;
 
                     if (line.StartsWith(requiredLineStart))
                         value = line.Substring(requiredLineStart.Length);
@@ -275,10 +350,11 @@ namespace IOExtension
             finally
             {
                 streamReader?.Dispose();
+                isLocked = false;
             }
 
-            isLocked = false;
             return value;
         }
+        #endregion
     }
 }
